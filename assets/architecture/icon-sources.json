@@ -1,0 +1,148 @@
+{
+  "refs": {
+    "devicon": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "lucide": "f06ac67e33d645c40b8ce19a0419c85c5d7dd751"
+  },
+  "icons": [
+    {
+      "name": "electron",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/electron/electron-original.svg",
+      "bytes": 1553
+    },
+    {
+      "name": "javascript",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/javascript/javascript-original.svg",
+      "bytes": 1144
+    },
+    {
+      "name": "html5",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/html5/html5-original.svg",
+      "bytes": 607
+    },
+    {
+      "name": "css3",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/css3/css3-original.svg",
+      "bytes": 778
+    },
+    {
+      "name": "nodejs",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/nodejs/nodejs-original.svg",
+      "bytes": 1806
+    },
+    {
+      "name": "android",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/android/android-original.svg",
+      "bytes": 3827
+    },
+    {
+      "name": "java",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/java/java-original.svg",
+      "bytes": 1540
+    },
+    {
+      "name": "spring",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/spring/spring-original.svg",
+      "bytes": 943
+    },
+    {
+      "name": "mysql",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/mysql/mysql-original.svg",
+      "bytes": 2765
+    },
+    {
+      "name": "oracle",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/oracle/oracle-original.svg",
+      "bytes": 1244
+    },
+    {
+      "name": "unity",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/unity/unity-original.svg",
+      "bytes": 879
+    },
+    {
+      "name": "amazonwebservices",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+      "bytes": 3743
+    },
+    {
+      "name": "user-round",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/user-round.svg",
+      "bytes": 279
+    },
+    {
+      "name": "bluetooth",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/bluetooth.svg",
+      "bytes": 249
+    },
+    {
+      "name": "database",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/database.svg",
+      "bytes": 329
+    },
+    {
+      "name": "folder-open",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/folder-open.svg",
+      "bytes": 401
+    },
+    {
+      "name": "file-code",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/file-code.svg",
+      "bytes": 444
+    },
+    {
+      "name": "network",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/network.svg",
+      "bytes": 445
+    },
+    {
+      "name": "microchip",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/microchip.svg",
+      "bytes": 471
+    },
+    {
+      "name": "package",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/package.svg",
+      "bytes": 446
+    },
+    {
+      "name": "book-open",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/book-open.svg",
+      "bytes": 387
+    },
+    {
+      "name": "cloud",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/cloud.svg",
+      "bytes": 275
+    },
+    {
+      "name": "globe",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/globe.svg",
+      "bytes": 331
+    },
+    {
+      "name": "server",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/server.svg",
+      "bytes": 413
+    },
+    {
+      "name": "save",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/save.svg",
+      "bytes": 417
+    },
+    {
+      "name": "c",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/c/c-original.svg",
+      "bytes": 241
+    },
+    {
+      "name": "docker",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/docker/docker-original.svg",
+      "bytes": 4452
+    },
+    {
+      "name": "linux",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/linux/linux-original.svg",
+      "bytes": 193922
+    }
+  ]
+}
