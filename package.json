@@ -1,0 +1,11 @@
+{
+  "name": "career-portpolio",
+  "private": true,
+  "description": "Build tools for the downloadable career PDF",
+  "scripts": {
+    "build:pdf": "python scripts/build_pdf.py"
+  },
+  "devDependencies": {
+    "sharp": "0.35.4"
+  }
+}

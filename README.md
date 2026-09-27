@@ -14,6 +14,19 @@
 - 원격 백업 관리, 모바일 디지털 지갑 백엔드, 외부 서비스 연동과 조건별 성능 시험
 - 직접 제작한 담당 기능 요약과 애플리케이션 흐름도
 - 확대 도식의 좌클릭 드래그 이동 · 마우스 휠 확대 및 축소
+- 상단 `PDF 다운로드` 버튼으로 경력기술서 파일 저장
+
+## PDF 갱신
+
+- 출력: `output/pdf/Jang-MoonSu-Career.pdf`
+- 소개·회사 정보·업무 설명·구현 내용: `index.html`에서 추출
+- 도식: 기존 SVG 자산 사용
+- 사이트 내용 변경 후 PDF 재생성 및 함께 커밋
+- 준비: `python -m pip install -r scripts/requirements-pdf.txt`, `npm install`
+- 생성: `python scripts/build_pdf.py`
+- 기본 글꼴: Windows 맑은 고딕, PDF에 글꼴 포함
+- 다른 환경: `--font-dir`로 `malgun.ttf`와 `malgunbd.ttf`가 있는 폴더 지정
+- 공유 Node 패키지 환경: `--node-modules`로 패키지 폴더 지정
 
 ## 라이선스
 
