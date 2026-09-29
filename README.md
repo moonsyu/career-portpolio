@@ -41,11 +41,23 @@
 - Redis 복구와 스케줄 삭제 후 이력 유지 사례는 미사용
 - 웹·PDF의 프로젝트 및 상세 사례 순서 동기화
 
+## 애플리케이션 아키텍처
+
+- CMP: React 클라이언트 → 조회 API·서비스 → NSS·NBU 연동 모듈 → 두 외부 API; v2.0의 테넌트 매핑과 페이지 수집 구조
+- Arabica: React → Spring Security·Controller·Service → JPA·MariaDB; 스케줄러·비동기 작업·SSH와 원격 서버, Redis 로그인 토큰 저장소 연결
+- 모바일 디지털 지갑: 보안 필터 → Dispatcher → JSON method 기반 업무 Bean → MyBatis·PostgreSQL; 외부 SMS·FCM 발송과 사용자 앱 전달 경로
+- Wallet 일반 조회는 MyBatis, JPA Entity는 초기 스키마 관리 역할로 구분
+- 애플리케이션 내부 모듈과 외부 서비스·저장소 경계 표시; 화살표에 호출·데이터 전달 관계 표기
+- 기술 로고와 기능 아이콘은 구성요소를 식별하는 용도로 사용; 아이콘 출처와 라이선스는 기존 자산 목록에 기록
+- 프로젝트 전체 구조와 개인 담당 범위 구분; 회사 주소·접속정보·원본 코드 제외
+
 ## PDF 갱신
 
 - 출력: `output/pdf/Jang-MoonSu-Career.pdf`
 - 소개·회사 정보·업무 설명·구현 내용·개선·트러블슈팅·부하 비교: `index.html`에서 추출
 - 도식: 기존 SVG 자산 사용
+- 각 프로젝트의 아키텍처는 독립된 A4 가로 페이지에 확대 배치; 나머지 설명 페이지는 A4 세로 유지
+- 현재 구성: 소개 1쪽, 프로젝트별 개요·구현 3쪽, 아키텍처 3쪽, 트러블슈팅·개선·성능 시험 6쪽
 - 프로젝트별 상세 항목은 `section.detail-page` 순서대로 별도 PDF 페이지 생성
 - 사이트 내용 변경 후 PDF 재생성 및 함께 커밋
 - 준비: `python -m pip install -r scripts/requirements-pdf.txt`, `npm install`
@@ -54,7 +66,7 @@
 - 다른 환경: `--font-dir`로 `malgun.ttf`와 `malgunbd.ttf`가 있는 폴더 지정
 - 공유 Node 패키지 환경: `--node-modules`로 패키지 폴더 지정
 
-## 변경 검토 기록 · 2026-09-29
+## CJ 직무 기준 재배치 검토 · 2026-09-29
 
 - 웹 360·390·768·900·1280·1500px 화면, 이미지 확대·이동, PDF 다운로드 확인
 - PDF 10쪽의 순서·페이지 번호·글자 잘림·겹침 확인
@@ -67,6 +79,22 @@
 | `/root/three_design_plan` | `gpt-6-astra / xhigh` | JD 대응 순서 및 근거·표현 범위 검토 | 완료 |
 | `/root/portfolio_design_ac` | `gpt-5.6-terra / medium` | HTML 구성과 트러블슈팅 도식 수정 | 완료 |
 | `/root/design_image_qa` | `gpt-5.6-terra / medium` | 내용·웹·모바일·PDF 독립 검토 | 완료 |
+
+## 애플리케이션 아키텍처 재작성 검토 · 2026-09-29
+
+- 세 도식의 클라이언트·내부 컴포넌트·저장소·외부 서비스와 호출 관계를 원자료에 대조
+- 아이콘·텍스트 겹침, 도식 영역 이탈, 화살표 종단과 데이터 흐름 검토 완료
+- 웹 6개 화면 폭과 아키텍처 3개의 확대·휠·드래그·닫기 동작 확인
+- PDF 13쪽 전수 확인; 3·8·12쪽 가로 아키텍처와 개요·구현·트러블슈팅·비교 수치 보존 확인
+- 독립 최종 검토: 통과
+- 주 에이전트가 초안의 간선·아이콘 배치를 수정하고 최종 통합·PDF·배포 검증 담당
+- 아래 설정은 요청값이며 실제 런타임 설정은 도구에서 제공되지 않아 별도 확인 불가
+
+| 에이전트 ID | 요청 설정 | 작업 | 상태 |
+|---|---|---|---|
+| `/root/three_design_plan` | `gpt-6-astra / xhigh` | CMP·Wallet 원자료 확인 및 애플리케이션 구성 계획 | 완료 |
+| `/root/portfolio_design_ac` | `gpt-5.6-terra / medium` | 아키텍처 초안 제작 | 완료 · 주 에이전트 통합 수정 |
+| `/root/design_image_qa` | `gpt-5.6-terra / medium` | 최종 도식과 PDF 13쪽 독립 검토 | 통과 |
 
 ## 라이선스
 

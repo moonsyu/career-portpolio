@@ -39,7 +39,7 @@
         <p class="hero-description">외부 서비스 연동 · 조건별 성능 시험<br>원격 백업 관리 · 모바일 디지털 지갑</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#projects">업무 보기 <span aria-hidden="true">↓</span></a>
-          <a class="button button-pdf" href="./output/pdf/Jang-MoonSu-Career.pdf?v=cj-dx-1" download="Jang-MoonSu-Career.pdf" aria-label="경력기술서 PDF 다운로드">PDF 다운로드 <span aria-hidden="true">↓</span></a>
+          <a class="button button-pdf" href="./output/pdf/Jang-MoonSu-Career.pdf?v=application-1" download="Jang-MoonSu-Career.pdf" aria-label="경력기술서 PDF 다운로드">PDF 다운로드 <span aria-hidden="true">↓</span></a>
           <a class="button button-secondary" href="https://moonsyu.github.io/portpolio/" target="_blank" rel="noreferrer">프로젝트 포트폴리오 ↗</a>
         </div>
         <div class="hero-bottom" aria-label="경력 분야와 기간">
@@ -143,14 +143,14 @@
             <div class="detail-body">
               <section aria-labelledby="integration-architecture-title">
                 <p class="label">APPLICATION ARCHITECTURE</p>
-                <h4 class="detail-title" id="integration-architecture-title">외부 인증 연동과 조건별 시험을 위한 흐름</h4>
+                <h4 class="detail-title" id="integration-architecture-title">NSS·NBU 연동을 분리한 조회 애플리케이션</h4>
                 <figure class="application-architecture">
                   <div class="application-map" tabindex="0" role="region" aria-label="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처. 가로 스크롤 가능">
                     <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처 확대">
-                      <img src="./assets/architecture/integration-application.svg" width="1320" height="800" alt="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처" loading="lazy">
+                      <img src="./assets/architecture/integration-application.svg?v=application-1" width="1320" height="800" alt="CMP 애플리케이션 아키텍처: React 클라이언트, API와 조회 서비스, NSS·NBU 연동 모듈 및 외부 API의 연결" loading="lazy">
                     </button>
                   </div>
-                  <figcaption><span>외부 인증 API · 세션과 토큰 · 조건별 비교</span><span>클릭하여 크게 보기 ↗</span></figcaption>
+                  <figcaption><span>CMP v2.0 · React · Spring WebFlux · NSS·NBU API</span><span>클릭하여 크게 보기 ↗</span></figcaption>
                   <p class="diagram-scroll-hint">← 도식이 넓습니다. 좌우로 스크롤하거나 클릭해 확대해 보세요. →</p>
                 </figure>
               </section>
@@ -217,14 +217,14 @@
             <div class="detail-body">
               <section aria-labelledby="backup-architecture-title">
                 <p class="label">APPLICATION ARCHITECTURE</p>
-                <h4 class="detail-title" id="backup-architecture-title">정책과 스케줄, 원격 실행과 이력 관리 흐름</h4>
+                <h4 class="detail-title" id="backup-architecture-title">API·비동기 실행·저장소로 구성한 백업 애플리케이션</h4>
                 <figure class="application-architecture">
                   <div class="application-map" tabindex="0" role="region" aria-label="원격 백업 관리 애플리케이션 아키텍처. 가로 스크롤 가능">
                     <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="원격 백업 관리 애플리케이션 아키텍처 확대">
-                      <img src="./assets/architecture/backup-application.svg" width="1320" height="800" alt="원격 백업 관리 애플리케이션 아키텍처: 정책과 스케줄, 원격 실행, 결과 검증과 이력 관리 흐름" loading="lazy">
+                      <img src="./assets/architecture/backup-application.svg?v=application-1" width="1320" height="900" alt="Arabica 애플리케이션 아키텍처: React와 Spring Boot 계층, 비동기 백업 실행, MariaDB·Redis 및 SSH 원격 서버의 연결" loading="lazy">
                     </button>
                   </div>
-                  <figcaption><span>정책 · 스케줄 · 원격 실행 · 이력 관리</span><span>클릭하여 크게 보기 ↗</span></figcaption>
+                  <figcaption><span>Spring Boot 백엔드 · 저장소 · SSH 원격 실행</span><span>클릭하여 크게 보기 ↗</span></figcaption>
                   <p class="diagram-scroll-hint">← 도식이 넓습니다. 좌우로 스크롤하거나 클릭해 확대해 보세요. →</p>
                 </figure>
               </section>
@@ -300,14 +300,15 @@
             <div class="detail-body">
               <section aria-labelledby="wallet-architecture-title">
                 <p class="label">APPLICATION ARCHITECTURE</p>
-                <h4 class="detail-title" id="wallet-architecture-title">사용자 API, 인증과 알림을 연결한 흐름</h4>
+                <h4 class="detail-title" id="wallet-architecture-title">보안 필터와 Dispatcher 기반 요청 처리 구조</h4>
                 <figure class="application-architecture">
                   <div class="application-map" tabindex="0" role="region" aria-label="모바일 디지털 지갑 애플리케이션 아키텍처. 가로 스크롤 가능">
                     <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="모바일 디지털 지갑 애플리케이션 아키텍처 확대">
-                      <img src="./assets/architecture/wallet-application.svg" width="1320" height="800" alt="모바일 디지털 지갑 애플리케이션 아키텍처: 사용자 API, 인증, 통신 암호화와 알림 흐름" loading="lazy">
+                      <img src="./assets/architecture/wallet-application.svg?v=application-1" width="1320" height="920" alt="디지털 지갑 애플리케이션 아키텍처: 보안 필터, Dispatcher와 업무 메서드, MyBatis·PostgreSQL, 외부 알림 연동" loading="lazy">
                     </button>
                   </div>
-                  <figcaption><span>사용자 API · 인증 · 통신 암호화 · 알림</span><span>클릭하여 크게 보기 ↗</span></figcaption>
+                  <figcaption><span>프로젝트 애플리케이션 구조 · Dispatcher·MyBatis·외부 연동</span><span>클릭하여 크게 보기 ↗</span></figcaption>
+                  <p class="diagram-scroll-hint">개인 담당: 회원·지갑 API, 인증·암호화·알림 개선, 오류 수정 및 문서화</p>
                   <p class="diagram-scroll-hint">← 도식이 넓습니다. 좌우로 스크롤하거나 클릭해 확대해 보세요. →</p>
                 </figure>
               </section>

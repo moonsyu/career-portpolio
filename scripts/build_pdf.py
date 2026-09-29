@@ -6,13 +6,14 @@ from argparse import ArgumentParser
 from html import escape
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlsplit
 import json
 import os
 import subprocess
 import tempfile
 
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
@@ -83,11 +84,13 @@ class Document(HTMLParser):
 
 
 def build(font_dir, node_modules=None):
+    W, H = A4
+    CW = W - 2*M
     for name, filename in [('Career', 'malgun.ttf'), ('CareerBold', 'malgunbd.ttf')]:
         pdfmetrics.registerFont(TTFont(name, str(font_dir / filename)))
     doc = Document((ROOT / 'index.html').read_text(encoding='utf-8')).root
     projects = doc.select(tag='article', cls='project')
-    page_count = 1 + sum(1 + len(p.select(cls='detail-page')) for p in projects)
+    page_count = 1 + sum(2 + len(p.select(cls='detail-page')) for p in projects)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     pdf = canvas.Canvas(str(OUTPUT), pagesize=A4, pageCompression=1, invariant=1)
     pdf.setTitle('장문수 | 경력기술서')
@@ -126,7 +129,7 @@ def build(font_dir, node_modules=None):
         for project in projects:
             for cls in ['work-visual', 'application-architecture']:
                 source = project.one(cls=cls).one(tag='img').attrs['src']
-                original = ROOT / source
+                original = ROOT / urlsplit(source).path
                 dest = temp / (original.stem + '.png')
                 jobs.append({'source': str(original), 'dest': str(dest)})
                 images[(project.attrs['id'], cls)] = dest
@@ -203,11 +206,11 @@ const jobs = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
             y = text(desc.one(cls='techline').text(), M, y+2, size=9, color=BLUE) + 12
             rule(y)
             y += 12
-            text('APPLICATION ARCHITECTURE', M, y, size=9, bold=True, color=BLUE)
+            text('담당 기능 요약', M, y, size=9, bold=True, color=BLUE)
             image_top = y + 20
-            picture(images[(project.attrs['id'], 'application-architecture')],
-                    M, image_top, CW, CW * 800 / 1320)
-            y = image_top + CW * 800 / 1320 + 12
+            picture(images[(project.attrs['id'], 'work-visual')],
+                    M, image_top, CW, CW * 520 / 840)
+            y = image_top + CW * 520 / 840 + 12
             text('IMPLEMENTATION', M, y, size=9, bold=True, color=BLUE)
             y += 23
             cards = [c for c in project.one(cls='work-detail-list').children if isinstance(c, Element)]
@@ -219,6 +222,26 @@ const jobs = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
                     cy = text('• ' + item.text(), x, cy, width, 10, bold=True, leading=15) + 5
             footer(page_number)
             page_number += 1
+
+            # Give each application graph a landscape page so labels and
+            # interfaces remain readable without reducing the overview text.
+            W, H = landscape(A4)
+            CW = W - 2*M
+            pdf.setPageSize((W,H))
+            text(f'0{number} / APPLICATION ARCHITECTURE', M, 25, CW,
+                 size=9, bold=True, color=BLUE)
+            text(project.one(tag='h3').text(), M, 43, CW, size=20, bold=True)
+            is_wallet = project.attrs['id'] == 'wallet'
+            picture(images[(project.attrs['id'], 'application-architecture')],
+                    M, 83, CW, H-(154 if is_wallet else 126))
+            if is_wallet:
+                text('개인 담당: 회원·지갑 API, 인증·암호화·알림 개선, 오류 수정 및 문서화',
+                     M, H-67, CW, size=10, bold=True, color=BLUE)
+            footer(page_number)
+            page_number += 1
+            W, H = A4
+            CW = W - 2*M
+            pdf.setPageSize((W,H))
 
             # Every project detail is read from the website, in document order.
             # Benchmarks retain their own conditions instead of borrowing those

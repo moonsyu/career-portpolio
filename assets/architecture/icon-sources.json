@@ -143,6 +143,71 @@
       "name": "linux",
       "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/linux/linux-original.svg",
       "bytes": 193922
+    },
+    {
+      "name": "shield-check",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/shield-check.svg",
+      "bytes": 415
+    },
+    {
+      "name": "calendar-clock",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/calendar-clock.svg",
+      "bytes": 422
+    },
+    {
+      "name": "list-filter",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/list-filter.svg",
+      "bytes": 278
+    },
+    {
+      "name": "terminal",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/terminal.svg",
+      "bytes": 261
+    },
+    {
+      "name": "workflow",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/workflow.svg",
+      "bytes": 351
+    },
+    {
+      "name": "wallet",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/wallet.svg",
+      "bytes": 387
+    },
+    {
+      "name": "bell-ring",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/bell-ring.svg",
+      "bytes": 469
+    },
+    {
+      "name": "smartphone",
+      "url": "https://raw.githubusercontent.com/lucide-icons/lucide/f06ac67e33d645c40b8ce19a0419c85c5d7dd751/icons/smartphone.svg",
+      "bytes": 294
+    },
+    {
+      "name": "postgresql",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/postgresql/postgresql-original.svg",
+      "bytes": 9178
+    },
+    {
+      "name": "firebase",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/firebase/firebase-original.svg",
+      "bytes": 1170
+    },
+    {
+      "name": "react",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/react/react-original.svg",
+      "bytes": 2387
+    },
+    {
+      "name": "mariadb",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/mariadb/mariadb-original.svg",
+      "bytes": 1831
+    },
+    {
+      "name": "redis",
+      "url": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/redis/redis-original.svg",
+      "bytes": 1728
     }
   ]
 }
