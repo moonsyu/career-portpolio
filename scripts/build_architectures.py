@@ -82,13 +82,13 @@ def overview(filename, title, subtitle, items):
 
 
 def backup():
-    d=Diagram('원격 백업 관리 · 담당 기능 흐름','백업 요청과 일정에 따라 정책별 명령을 구성하고 SSH와 Bash로 원격 작업을 실행. 결과 판독과 검증, 로그 검색과 이력 관리, 복원을 수행하는 담당 기능 중심 설명도.')
-    d.text(660,49,'원격 백업 관리 · 담당 기능 흐름',28,True)
+    d=Diagram('Arabica · 원격 백업 관리 · 담당 기능 흐름','장문수가 백엔드에서 백업 요청과 일정에 따라 정책별 명령을 구성하고 Apache MINA SSHD와 Bash로 원격 작업을 실행한 담당 기능 중심 설명도.')
+    d.text(660,49,'Arabica · 원격 백업 관리 · 담당 기능 흐름',28,True)
     d.node('user-round',103,205,'사용자',['정책 · 일정','실행 · 복원 요청'],size=70)
-    d.box(259,99,730,378,'Java · Spring Boot 백엔드')
+    d.box(259,99,730,378,'Arabica · Java 17 · Spring Boot 3.2.5')
     d.icon('spring',575,153,52);d.icon('java',645,151,54)
     d.box(288,244,198,184,'정책 · 일정',fill='#f5f8fd',stroke='#c9d6e8',width=1.5)
-    d.text(387,325,'전체 · 증분 · 차분',20,True)
+    d.text(387,325,'전체 · 증분 · 차등',20,True)
     d.text(387,371,'스케줄 관리',21)
     d.box(522,244,198,184,'작업 실행',fill='#f5f8fd',stroke='#c9d6e8',width=1.5)
     d.text(621,325,'명령 구성',21,True)
@@ -139,10 +139,10 @@ def wallet():
 
 
 def integration():
-    d=Diagram('외부 서비스 연동 · 담당 기능 흐름','로그인 요청을 WebFlux와 WebClient 기반 백엔드에서 외부 인증 API에 연결하고 인증 상태와 응답을 처리. 데이터 규모·동시 요청 조건별 성능을 시험하는 담당 기능 설명도.')
-    d.text(660,49,'외부 서비스 연동 · 담당 기능 흐름',28,True)
+    d=Diagram('CMP · 외부 서비스 연동 · 담당 기능 흐름','외부 인증 API, 세션과 HttpOnly 토큰 처리, 테넌트별 Kubernetes 정책 조회 개선과 조건별 성능 시험을 담당한 기능 설명도.')
+    d.text(660,49,'CMP · 외부 서비스 연동 · 담당 기능 흐름',28,True)
     d.node('user-round',105,212,'로그인 요청',size=66)
-    d.box(297,116,614,346,'Java · Spring WebFlux')
+    d.box(297,116,614,346,'CMP · Java · Spring WebFlux')
     d.icon('spring',407,180,63)
     d.text(653,219,'WebClient · Reactor Mono',25,True)
     d.text(605,288,'외부 인증 API 연동 · 응답 처리',24,True)
@@ -164,10 +164,74 @@ def integration():
     return d.save('integration-application.svg')
 
 
+def backup_restore_verification():
+    d=Diagram('백업 복원 검증 흐름','애플리케이션 백업 검증 흐름과 별도의 MySQL·Docker 복원 실험 요약을 구분한 도식.',600)
+    d.text(660,52,'백업 파일 생성부터 복원 데이터 확인까지',30,True)
+    d.text(52,116,'초기 확인',20,True,anchor='start',fill='#2855bf')
+    initial=[('파일 생성','01'),('전송','02'),('로그 저장','03')]
+    for i,(title,no) in enumerate(initial):
+        x=252+i*276
+        d.box(x,92,220,72,fill='#f5f8fd',stroke='#c9d6e8',width=1.5)
+        d.text(x+27,120,no,14,True,anchor='start',fill='#2855bf');d.text(x+122,136,title,19,True)
+        if i<2:d.arrow([(x+222,128),(x+268,128)])
+    d.text(52,232,'개선 후',20,True,anchor='start',fill='#2855bf')
+    steps=[('최종 파일·로그','오류 점검'),('DR 전송','대상 준비'),('복원 실행','복원 수행'),('복원 로그·데이터','결과 점검')]
+    for i,(title,sub) in enumerate(steps):
+        x=222+i*272
+        d.box(x,207,228,94,fill='#fff',stroke='#c9d6e8',width=1.5)
+        d.text(x+114,245,title,20,True);d.text(x+114,277,sub,18,fill='#52627b')
+        if i<3:d.arrow([(x+230,255),(x+264,255)])
+    d.box(126,370,1068,164,'MySQL · Docker 복원 실험',fill='#fff',stroke='#2855bf',width=2)
+    d.text(340,452,'백업 후 추가',20,True); d.text(340,496,'1행',28,True,fill='#2855bf')
+    d.arrow([(460,479),(536,479)])
+    d.text(660,452,'전체 복원 후',20,True); d.text(660,496,'추가 데이터 0행',26,True,fill='#2855bf')
+    d.arrow([(784,479),(860,479)])
+    d.text(980,452,'증분 적용 후',20,True); d.text(980,496,'추가 데이터 1행 복구',24,True,fill='#2855bf')
+    return d.save('backup-restore-verification.svg')
+
+
+def integration_response_comparison():
+    d=Diagram('MVC와 WebFlux 응답시간 비교','기록된 평균 응답시간 2,000ms와 584ms를 가로 막대로 비교한 도식. 데이터 건수와 동시 사용자 조건은 기록되지 않았다.',600)
+    d.text(660,54,'MVC → WebFlux 평균 응답시간 비교',30,True)
+    d.text(660,96,'기록 기준 · 데이터 건수와 동시 사용자 조건 미기재',20,fill='#52627b')
+    d.text(177,204,'MVC',23,True,anchor='start')
+    d.box(177,229,860,62,fill='#e4e9f1',stroke='#c9d6e8',width=1.5)
+    d.parts.append('<rect x="177" y="229" width="860" height="62" rx="20" fill="#52627b"/>')
+    d.text(1067,269,'2,000 ms',25,True,anchor='start')
+    d.text(177,371,'WebFlux',23,True,anchor='start')
+    d.box(177,396,860,62,fill='#e4e9f1',stroke='#c9d6e8',width=1.5)
+    d.parts.append('<rect x="177" y="396" width="251" height="62" rx="20" fill="#2855bf"/>')
+    d.text(458,436,'584 ms',25,True,anchor='start')
+    d.box(424,510,472,58,fill='#f5f8fd',stroke='#acbff0',width=1.5)
+    d.text(660,548,'평균 응답시간 70.8% 감소',23,True,fill='#2855bf')
+    return d.save('integration-response-comparison.svg')
+
+
+def integration_tenant_policy():
+    d=Diagram('테넌트별 백업 정책 조회 흐름','NSS와 NBU 조회를 분리하고 테넌트, 클러스터, namespace 매핑으로 조회 범위를 조정하는 흐름도.',600)
+    d.text(660,52,'테넌트별 백업 정책 조회 범위 조정',30,True)
+    d.box(56,210,210,130,'요청 테넌트',fill='#fff',stroke='#c9d6e8',width=1.5)
+    d.text(161,286,'정책 조회 요청',20,fill='#52627b')
+    d.box(386,116,220,118,'NSS 조회',fill='#fff',stroke='#c9d6e8',width=1.5); d.text(496,191,'정책 조회',20,fill='#52627b')
+    d.box(386,314,220,118,'NBU 조회',fill='#fff',stroke='#c9d6e8',width=1.5); d.text(496,389,'정책 조회',20,fill='#52627b')
+    d.box(736,210,252,130,'매핑 필터',fill='#f5f8fd',stroke='#acbff0',width=1.5)
+    d.text(862,282,'테넌트 · 클러스터',20,True); d.text(862,313,'namespace',20,True)
+    d.box(1084,210,190,130,'정책 목록',fill='#f5f8fd',stroke='#acbff0',width=1.5)
+    d.text(1179,286,'해당 테넌트',20,True); d.text(1179,317,'결과',20,True)
+    d.arrow([(268,275),(333,275),(333,175),(376,175)])
+    d.arrow([(268,275),(333,275),(333,373),(376,373)])
+    d.arrow([(608,175),(680,175),(680,255),(726,255)])
+    d.arrow([(608,373),(680,373),(680,295),(726,295)])
+    d.arrow([(990,275),(1074,275)])
+    d.text(660,485,'NSS · NBU 조회 분리 → 매핑 필터 합류 → 해당 테넌트 정책 목록',22,True)
+    d.text(660,548,'페이지 처리 · API 로그는 조회 흐름 점검의 보조 기록',20,fill='#52627b')
+    return d.save('integration-tenant-policy.svg')
+
+
 if __name__ == '__main__':
     used=set()
-    used |= overview('backup-overview.svg','원격 백업 관리','정책 · 실행 · 결과를 연결하는 백엔드',[('file-code','백업 정책','전체 · 증분 · 차분'),('linux','원격 실행','SSH · Bash'),('database','이력 · 복원','검증 · 검색 · 보관')])
+    used |= overview('backup-overview.svg','Arabica · 원격 백업 관리','정책 · 실행 · 결과를 연결하는 백엔드',[('file-code','백업 정책','전체 · 증분 · 차등'),('linux','원격 실행','SSH · Bash'),('database','이력 · 복원','검증 · 검색 · 보관')])
     used |= overview('wallet-overview.svg','모바일 디지털 지갑','인증 · 데이터 보호 · 알림 기능 개발',[('user-round','회원 · 지갑','서비스 API'),('network','인증 · 보안','SSE · QR · RSA'),('cloud','알림','SMS · FCM')])
-    used |= overview('integration-overview.svg','외부 서비스 연동','인증 API 연동과 조건별 성능 비교',[('spring','WebFlux','구조 전환'),('network','인증 연동','WebClient · Mono'),('server','성능 시험','응답 · 메모리 · 오류')])
-    for build in [backup,wallet,integration]:used |= build()
-    print('Built 6 diagrams; icons:', ', '.join(sorted(used)))
+    used |= overview('integration-overview.svg','CMP · 외부 서비스 연동','인증 API 연동과 조건별 성능 비교',[('spring','WebFlux','구조 전환'),('network','인증 연동','WebClient 공통화'),('server','성능 시험','응답 · 메모리 · 오류')])
+    for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy]:used |= build()
+    print('Built 9 diagrams; icons:', ', '.join(sorted(used)))

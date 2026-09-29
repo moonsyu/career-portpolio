@@ -154,4 +154,15 @@ strong,b{font-weight:750;color:var(--ink)}
 .flow-comparison>div{padding:24px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
 .flow-comparison strong{font-size:19px;color:var(--blue);display:block;margin-bottom:12px}
 .flow-comparison p{font-size:18px;font-weight:650;line-height:1.8}
+.detail-page{border-top:1px solid var(--line);margin-top:42px;padding-top:42px}
+.case-note{margin-top:20px;padding:14px 18px;border-left:3px solid var(--blue);background:var(--blue-soft);font-size:16px;font-weight:650;line-height:1.75}
+.benchmark-context{margin-bottom:20px;padding:18px 22px;background:var(--paper);border:1px solid var(--line);border-radius:9px}
+.benchmark-context ul{margin:0;padding-left:22px;font-size:17px;font-weight:650;line-height:1.8}
+.benchmark-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px;background:#fff}
+.benchmark-table{width:100%;min-width:650px;border-collapse:collapse;font-size:17px;text-align:right}
+.benchmark-table caption{caption-side:top;text-align:left;padding:18px 20px;font-size:19px;font-weight:750;color:var(--blue)}
+.benchmark-table th,.benchmark-table td{padding:14px 18px;border-top:1px solid var(--line);white-space:nowrap}
+.benchmark-table th{background:var(--paper);font-weight:750;color:var(--ink)}
+.benchmark-table th:first-child,.benchmark-table td:first-child{text-align:left}
+.benchmark-table-wrap:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 @media(max-width:760px){.career-facts>div{grid-template-columns:1fr;gap:6px}.career-facts dd{font-size:18px}.work-detail-list,.flow-comparison{grid-template-columns:1fr}.work-detail-list>div{padding:19px}.work-detail-list ul,.work-outcomes span,.flow-comparison p{font-size:17px}.work-outcomes li{padding:19px}.work-visual .image-button{padding:12px}.career-facts dt{font-size:16px}}

@@ -87,6 +87,7 @@ def build(font_dir, node_modules=None):
         pdfmetrics.registerFont(TTFont(name, str(font_dir / filename)))
     doc = Document((ROOT / 'index.html').read_text(encoding='utf-8')).root
     projects = doc.select(tag='article', cls='project')
+    page_count = 1 + sum(1 + len(p.select(cls='detail-page')) for p in projects)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     pdf = canvas.Canvas(str(OUTPUT), pagesize=A4, pageCompression=1, invariant=1)
     pdf.setTitle('장문수 | 경력기술서')
@@ -111,7 +112,7 @@ def build(font_dir, node_modules=None):
     def footer(page):
         rule(H - 35)
         text('Jang MoonSu · CAREER', M, H - 29, size=8, color=MUTED, max_bottom=H-8)
-        text(f'{page:02d} / {len(projects)+1:02d}', W - 90, H - 29, 52, 8, color=MUTED, max_bottom=H-8)
+        text(f'{page:02d} / {page_count:02d}', W - 90, H - 29, 52, 8, color=MUTED, max_bottom=H-8)
         pdf.showPage()
 
     def picture(path, x, top, width, height):
@@ -129,6 +130,15 @@ def build(font_dir, node_modules=None):
                 dest = temp / (original.stem + '.png')
                 jobs.append({'source': str(original), 'dest': str(dest)})
                 images[(project.attrs['id'], cls)] = dest
+            for section in project.select(cls='detail-page'):
+                for img in section.select(tag='img'):
+                    original = ROOT / img.attrs['src']
+                    if original.suffix.lower() == '.svg':
+                        dest = temp / (original.stem + '.png')
+                        jobs.append({'source': str(original), 'dest': str(dest)})
+                    else:
+                        dest = original
+                    images[img.attrs['src']] = dest
         manifest = temp / 'images.json'
         manifest.write_text(json.dumps(jobs), encoding='utf-8')
         env = os.environ.copy()
@@ -165,7 +175,10 @@ const jobs = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
         for i, project in enumerate(projects):
             x = M + (tile + gap) * i
             picture(images[(project.attrs['id'], 'work-visual')], x, 538, tile, tile * 520 / 840)
-            text(f'0{i+1}  ' + project.one(tag='h3').text(), x, 652, tile, 11, bold=True)
+            title = project.one(tag='h3').text().split(' · ', 1)
+            bottom = text(f'0{i+1}  ' + title[0], x, 652, tile, 11, bold=True)
+            if len(title) > 1:
+                text(title[1], x, bottom+5, tile, 10, bold=True, color=MUTED)
         text(doc.one(cls='about-copy').text(), M, 714, size=11, bold=True)
         email = doc.one(cls='contact-links').select(tag='a')[0].attrs['href']
         site = next(link.attrs['href'] for link in doc.select(tag='link')
@@ -176,6 +189,7 @@ const jobs = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
         pdf.linkURL(site, (M+220, H-785, W-M, H-760), relative=0)
         footer(1)
 
+        page_number = 2
         for number, project in enumerate(projects, 1):
             text(f'0{number} / WORK', M, 32, size=9, bold=True, color=BLUE)
             text(project.one(tag='h3').text(), M, 52, size=23, bold=True)
@@ -202,9 +216,100 @@ const jobs = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
                 cy = text(card.one(tag='h5').text(), x, y, width, 11, bold=True, color=BLUE) + 6
                 for item in card.select(tag='li'):
                     cy = text('• ' + item.text(), x, cy, width, 10, bold=True, leading=15) + 5
-            footer(number+1)
+            footer(page_number)
+            page_number += 1
+
+            # Every project detail is read from the website, in document order.
+            # Benchmarks retain their own conditions instead of borrowing those
+            # of the separate MVC/WebFlux response-time comparison.
+            for section in project.select(cls='detail-page'):
+                kind = section.attrs.get('data-page-kind', 'improvement')
+                label = {'improvement': 'IMPROVEMENT',
+                         'troubleshooting': 'TROUBLESHOOTING',
+                         'benchmark': 'PERFORMANCE TEST'}[kind]
+                text(f'0{number} / {label}', M, 32, size=9, bold=True, color=BLUE)
+                y = text(project.one(tag='h3').text(), M, 52, size=23, bold=True) + 12
+                y = text(section.one(cls='detail-title').text(), M, y,
+                         size=16, bold=True) + 18
+                rule(y)
+                y += 18
+
+                facts = section.select(cls='case-facts')
+                if facts:
+                    rows = [c for c in facts[0].children if isinstance(c, Element)]
+                    column = (CW - 28) / len(rows)
+                    bottoms = []
+                    for i, row in enumerate(rows):
+                        x = M + (column + 14) * i
+                        cy = text(row.one(tag='dt').text(), x, y, column,
+                                  11, bold=True, color=BLUE) + 7
+                        dd = row.one(tag='dd')
+                        items = dd.select(tag='li')
+                        for value in ([item.text() for item in items] or [dd.text()]):
+                            cy = text('• ' + value, x, cy, column, 10.5,
+                                      bold=True, leading=16) + 6
+                        bottoms.append(cy)
+                    y = max(bottoms) + 16
+
+                contexts = section.select(cls='benchmark-context')
+                for context in contexts:
+                    for item in context.select(tag='li'):
+                        y = text('• ' + item.text(), M, y, size=11,
+                                 bold=True, leading=17) + 6
+                    y += 14
+
+                for table in section.select(cls='benchmark-table'):
+                    captions = table.select(tag='caption')
+                    if captions:
+                        y = text(captions[0].text(), M, y, size=12,
+                                 bold=True, color=BLUE) + 12
+                    rows = table.select(tag='tr')
+                    for row_index, row in enumerate(rows):
+                        cells = [c for c in row.children if isinstance(c, Element)]
+                        width = CW / len(cells)
+                        row_height = 43
+                        if y + row_height > H - 45:
+                            raise ValueError('Benchmark table exceeds PDF page')
+                        pdf.setFillColor(BLUE if row_index == 0 else
+                                         PAPER if row_index % 2 else colors.white)
+                        pdf.rect(M, H-y-row_height, CW, row_height, fill=1, stroke=0)
+                        for i, cell in enumerate(cells):
+                            text(cell.text(), M+i*width+10, y+10, width-20,
+                                 10.5, bold=True,
+                                 color=colors.white if row_index == 0 else INK,
+                                 max_bottom=y+row_height)
+                        y += row_height
+                    y += 20
+
+                for figure in section.select(cls='evidence-figure'):
+                    img = figure.one(tag='img')
+                    ratio = float(img.attrs['height']) / float(img.attrs['width'])
+                    height = CW * ratio
+                    if y + height > H - 145:
+                        height = H - 145 - y
+                    if height < 150:
+                        raise ValueError('Evidence diagram lacks readable page space')
+                    picture(images[img.attrs['src']], M, y, CW, height)
+                    y += height + 12
+                    captions = figure.select(tag='figcaption')
+                    if captions:
+                        y = text(captions[0].text(), M, y, size=10,
+                                 bold=True, color=MUTED) + 14
+
+                for result in section.select(cls='result'):
+                    rule(y)
+                    y += 12
+                    items = result.select(tag='li')
+                    for value in ([item.text() for item in items] or [result.text()]):
+                        y = text('• ' + value, M, y, size=11, bold=True,
+                                 leading=17) + 7
+                for note in section.select(cls='case-note'):
+                    y = text('• ' + note.text(), M, y+8, size=10,
+                             bold=True, color=MUTED) + 8
+                footer(page_number)
+                page_number += 1
     pdf.save()
-    print(f'Created {OUTPUT} ({len(projects)+1} pages)')
+    print(f'Created {OUTPUT} ({page_count} pages)')
 
 
 if __name__ == '__main__':
