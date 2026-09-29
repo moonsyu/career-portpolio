@@ -36,10 +36,10 @@
       <div class="container">
         <p class="eyebrow">Jang MoonSu / CAREER PROFILE</p>
         <h1 id="hero-title">Java 백엔드<br><span>경력기술서</span></h1>
-        <p class="hero-description">원격 백업 관리 · 모바일 디지털 지갑<br>외부 서비스 연동 · 조건별 성능 시험</p>
+        <p class="hero-description">외부 서비스 연동 · 조건별 성능 시험<br>원격 백업 관리 · 모바일 디지털 지갑</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#projects">업무 보기 <span aria-hidden="true">↓</span></a>
-          <a class="button button-pdf" href="./output/pdf/Jang-MoonSu-Career.pdf" download="Jang-MoonSu-Career.pdf" aria-label="경력기술서 PDF 다운로드">PDF 다운로드 <span aria-hidden="true">↓</span></a>
+          <a class="button button-pdf" href="./output/pdf/Jang-MoonSu-Career.pdf?v=cj-dx-1" download="Jang-MoonSu-Career.pdf" aria-label="경력기술서 PDF 다운로드">PDF 다운로드 <span aria-hidden="true">↓</span></a>
           <a class="button button-secondary" href="https://moonsyu.github.io/portpolio/" target="_blank" rel="noreferrer">프로젝트 포트폴리오 ↗</a>
         </div>
         <div class="hero-bottom" aria-label="경력 분야와 기간">
@@ -68,7 +68,7 @@
                 <p>Java Backend Developer</p>
               </div>
             </div>
-            <p class="about-copy">API 개발 · 비동기 실행 관리<br>외부 인증 연동 · 시험 및 기술 문서 작성</p>
+            <p class="about-copy">외부 인증 연동 · 조건별 비교 시험<br>원격 백업 관리 · 모바일 서비스 백엔드</p>
           </div>
 
           <dl class="career-facts">
@@ -100,18 +100,90 @@
             <p class="label">02 / WORK</p>
             <h2 id="projects-title">업무</h2>
           </div>
-          <p>원격 실행 관리 · 모바일 서비스 백엔드<br>외부 연동 · 조건별 비교 시험</p>
+          <p>외부 연동 · 조건별 비교 시험<br>원격 실행 관리 · 모바일 서비스 백엔드</p>
         </div>
 
         <div class="project-index" aria-label="업무 바로가기">
-          <a href="#backup"><strong>01</strong><span>Arabica · 원격 백업 관리</span><small>BACKEND / AUTOMATION</small></a>
-          <a href="#wallet"><strong>02</strong><span>모바일 디지털 지갑</span><small>BACKEND / AUTHENTICATION</small></a>
-          <a href="#integration"><strong>03</strong><span>CMP · 외부 서비스 연동 · 성능 시험</span><small>INTEGRATION / VERIFICATION</small></a>
+          <a href="#integration"><strong>01</strong><span>CMP · 외부 서비스 연동 · 성능 시험</span><small>INTEGRATION / VERIFICATION</small></a>
+          <a href="#backup"><strong>02</strong><span>Arabica · 원격 백업 관리</span><small>BACKEND / AUTOMATION</small></a>
+          <a href="#wallet"><strong>03</strong><span>모바일 디지털 지갑</span><small>BACKEND / AUTHENTICATION</small></a>
         </div>
+
+        <article class="project" id="integration" aria-labelledby="integration-title">
+          <div class="project-heading">
+            <span class="project-no">01</span>
+            <h3 id="integration-title">CMP · 외부 서비스 연동 · 성능 시험</h3>
+            <span class="project-category">INTEGRATION / VERIFICATION</span>
+          </div>
+          <div class="project-overview">
+            <div class="project-description">
+              <p class="project-meta">외부 API 연동 · 조건별 비교 시험</p>
+              <h4>외부 인증 API 연동과 데이터·동시 사용자 조건별 비교 업무</h4>
+              <ul>
+                <li>WebClient 공통 유틸 기반 외부 인증 API 연동과 세션·HttpOnly Cookie 토큰 관리</li>
+                <li>테넌트별 Kubernetes 조회 범위 조정과 페이지 처리·API 로그 확인</li>
+                <li>조건별 응답시간·P95·JVM 메모리·오류 비교와 시험 문서 작성</li>
+              </ul>
+              <p class="techline"><span>TECH</span> Java · Spring WebFlux · WebClient · Mono · NetBackup API</p>
+              <ul class="skill-icons" aria-label="사용 기술">
+                <li><img src="./assets/architecture/icons/java.svg" alt="">Java</li>
+                <li><img src="./assets/architecture/icons/spring.svg" alt="">Spring WebFlux</li>
+                <li><img src="./assets/architecture/icons/network.svg" alt="">WebClient · Mono</li>
+              </ul>
+            </div>
+            <figure class="project-visual work-visual">
+              <button class="image-button" type="button" data-enlarge data-diagram aria-label="외부 서비스 연동과 성능 시험 담당 기능 요약 확대">
+                <img src="./assets/architecture/integration-overview.svg" width="840" height="520" alt="외부 서비스 연동과 성능 시험의 담당 기능 요약 도식" loading="lazy">
+              </button>
+              <figcaption><span>담당 기능 요약</span><span>클릭하여 크게 보기 ↗</span></figcaption>
+            </figure>
+          </div>
+          <details class="detail" open>
+            <summary>아키텍처 · 구현 · 트러블슈팅 · 성능 시험 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING · BENCHMARK</small></summary>
+            <div class="detail-body">
+              <section aria-labelledby="integration-architecture-title">
+                <p class="label">APPLICATION ARCHITECTURE</p>
+                <h4 class="detail-title" id="integration-architecture-title">외부 인증 연동과 조건별 시험을 위한 흐름</h4>
+                <figure class="application-architecture">
+                  <div class="application-map" tabindex="0" role="region" aria-label="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처. 가로 스크롤 가능">
+                    <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처 확대">
+                      <img src="./assets/architecture/integration-application.svg" width="1320" height="800" alt="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처" loading="lazy">
+                    </button>
+                  </div>
+                  <figcaption><span>외부 인증 API · 세션과 토큰 · 조건별 비교</span><span>클릭하여 크게 보기 ↗</span></figcaption>
+                  <p class="diagram-scroll-hint">← 도식이 넓습니다. 좌우로 스크롤하거나 클릭해 확대해 보세요. →</p>
+                </figure>
+              </section>
+              <section aria-labelledby="integration-implementation-title">
+                <p class="label">IMPLEMENTATION</p>
+                <h4 class="detail-title" id="integration-implementation-title">연동 처리와 조건별 시험을 위한 구현</h4>
+                <div class="work-detail-list">
+                  <div>
+                    <h5>외부 인증 연동</h5>
+                    <ul>
+                       <li>WebClient 공통 유틸 기반 외부 인증 API 연동</li>
+                       <li>세션 관리와 HttpOnly Cookie 기반 토큰 관리</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5>시험 문서</h5>
+                    <ul>
+                      <li>조건별 응답시간·P95·JVM 메모리·오류 비교</li>
+                      <li>배포 문서와 시험 문서 작성</li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="integration-improvement-title"><p class="label">TROUBLESHOOTING</p><h4 class="detail-title" id="integration-improvement-title">외부 API 응답 지연과 요청 처리 구조 개선</h4><div class="troubleshooting-grid"><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>MVC 평균 응답시간 2,000ms 기록</li></ul></dd></div><div><dt>검토 기준</dt><dd><ul><li>프레임워크 혼용 시 라이브러리 충돌 가능성 검토</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>WebFlux 단독 적용</li><li>WebClient 공통 유틸 구성</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="MVC와 WebFlux 응답시간 비교 확대"><img src="./assets/architecture/integration-response-comparison.svg" width="1320" height="600" alt="MVC 2000ms와 WebFlux 584ms 평균 응답시간 비교" loading="lazy"></button><figcaption>응답시간 비교 기록</figcaption></figure></div><p class="case-note">응답시간 비교 기록 기준 · 데이터 건수·동시 사용자 조건 미기재</p><div class="result"><strong>결과</strong><ul><li>WebFlux 평균 584ms 기록 · MVC 평균 대비 70.8% 감소</li></ul></div></section>
+              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="integration-troubleshooting-title"><p class="label">TROUBLESHOOTING</p><h4 class="detail-title" id="integration-troubleshooting-title">테넌트·클러스터·namespace 매핑으로 백업 정책 조회 범위 조정</h4><div class="troubleshooting-grid"><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>Kubernetes 백업 정책이 모든 테넌트에 표시</li></ul></dd></div><div><dt>점검</dt><dd><ul><li>NSS·NBU 조회 경로 분리</li><li>페이지 처리와 API 로그 확인</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>테넌트·클러스터·namespace 매핑 필터 적용</li><li>해당 테넌트 정책 조회 범위 조정</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="테넌트별 백업 정책 조회 흐름 확대"><img src="./assets/architecture/integration-tenant-policy.svg" width="1320" height="600" alt="NSS와 NBU 조회 분리 및 테넌트 매핑 필터를 통한 백업 정책 조회 흐름" loading="lazy"></button><figcaption>정책 조회 범위 조정 흐름</figcaption></figure></div><div class="result"><strong>결과</strong><ul><li>매핑 필터를 거쳐 해당 테넌트의 정책 조회 범위를 조정</li></ul></div></section>
+              <section class="detail-page" data-page-kind="benchmark" aria-labelledby="integration-benchmark-title"><p class="label">BENCHMARK</p><h4 class="detail-title" id="integration-benchmark-title">Ubuntu 22.04.5와 RHEL 9.4 조건별 응답시간 비교</h4><div class="benchmark-context"><ul><li>동일 호스트 사양 · JVM 24GB · Postman 조건별 각 1분</li><li>3만·20만 건 · 동시 가상 사용자(VU) 1·5·10명</li></ul></div><div class="benchmark-table-wrap" tabindex="0" role="region" aria-label="Ubuntu와 RHEL 평균 응답시간 비교 표. 가로 스크롤 가능"><table class="benchmark-table"><caption>평균 응답시간 비교 (ms)</caption><thead><tr><th scope="col">건수</th><th scope="col">VU</th><th scope="col">Ubuntu 22.04.5</th><th scope="col">RHEL 9.4</th></tr></thead><tbody><tr><td>30,000</td><td>1</td><td>1,474</td><td>1,179</td></tr><tr><td>30,000</td><td>5</td><td>2,678</td><td>2,469</td></tr><tr><td>30,000</td><td>10</td><td>5,421</td><td>5,247</td></tr><tr><td>200,000</td><td>1</td><td>7,174</td><td>6,617</td></tr><tr><td>200,000</td><td>5</td><td>20,036</td><td>24,914</td></tr><tr><td>200,000</td><td>10</td><td>47,133</td><td>43,814</td></tr></tbody></table></div><div class="result"><strong>관찰</strong><ul><li>건수와 VU 증가에 따라 응답시간 지연</li><li>20만 건·VU 5에서 Ubuntu 평균이 더 짧음</li></ul></div></section>
+            </div>
+          </details>
+        </article>
 
         <article class="project" id="backup" aria-labelledby="backup-title">
           <div class="project-heading">
-            <span class="project-no">01</span>
+            <span class="project-no">02</span>
             <h3 id="backup-title">Arabica · 원격 백업 관리</h3>
             <span class="project-category">BACKEND / AUTOMATION</span>
           </div>
@@ -121,15 +193,15 @@
               <h4>백업 정책, 실행 이력과 복원 흐름을 관리하는 백엔드 업무</h4>
               <ul>
                 <li>SSH·Bash 기반 전체·증분·차등 백업 정책과 커스텀 스케줄 관리</li>
-                <li>장시간 작업을 비동기로 분리하고 결과 판독·검증·이력 보관·복원 흐름 구현</li>
-                <li>특정 로그 검색·페이징 기능 제안 및 구현</li>
+                <li>정책별 명령 구성과 원격 실행, 로그 검색·페이징</li>
+                <li>결과 판독·검증·이력 보관과 복원 흐름</li>
               </ul>
-              <p class="techline"><span>TECH</span> Java 17 · Spring Boot 3.2.5 · Apache MINA SSHD · Linux · Bash</p>
+              <p class="techline"><span>TECH</span> Java 17 · Spring Boot 3.2.5 · SSH · Linux · Bash</p>
               <ul class="skill-icons" aria-label="사용 기술">
                 <li><img src="./assets/architecture/icons/java.svg" alt="">Java</li>
                 <li><img src="./assets/architecture/icons/spring.svg" alt="">Spring Boot</li>
                 <li><img src="./assets/architecture/icons/linux.svg" alt="">Linux</li>
-                <li><img src="./assets/architecture/icons/network.svg" alt="">Apache MINA SSHD</li>
+                <li><img src="./assets/architecture/icons/network.svg" alt="">SSH</li>
                 <li><img src="./assets/architecture/icons/file-code.svg" alt="">Bash</li>
               </ul>
             </div>
@@ -141,64 +213,61 @@
             </figure>
           </div>
           <details class="detail" open>
-            <summary>애플리케이션 아키텍처 · 구현 내용 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION</small></summary>
+            <summary>아키텍처 · 구현 · 트러블슈팅 · 개선 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING · IMPROVEMENT</small></summary>
             <div class="detail-body">
               <section aria-labelledby="backup-architecture-title">
                 <p class="label">APPLICATION ARCHITECTURE</p>
-                <h4 class="detail-title" id="backup-architecture-title">요청 처리와 장시간 백업 작업을 분리한 흐름</h4>
+                <h4 class="detail-title" id="backup-architecture-title">정책과 스케줄, 원격 실행과 이력 관리 흐름</h4>
                 <figure class="application-architecture">
                   <div class="application-map" tabindex="0" role="region" aria-label="원격 백업 관리 애플리케이션 아키텍처. 가로 스크롤 가능">
                     <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="원격 백업 관리 애플리케이션 아키텍처 확대">
-                      <img src="./assets/architecture/backup-application.svg" width="1320" height="800" alt="원격 백업 관리 애플리케이션 아키텍처: 정책과 스케줄, 비동기 실행, 결과 검증과 이력 관리 흐름" loading="lazy">
+                      <img src="./assets/architecture/backup-application.svg" width="1320" height="800" alt="원격 백업 관리 애플리케이션 아키텍처: 정책과 스케줄, 원격 실행, 결과 검증과 이력 관리 흐름" loading="lazy">
                     </button>
                   </div>
-                  <figcaption><span>정책 · 스케줄 · 비동기 실행 · 이력 관리</span><span>클릭하여 크게 보기 ↗</span></figcaption>
+                  <figcaption><span>정책 · 스케줄 · 원격 실행 · 이력 관리</span><span>클릭하여 크게 보기 ↗</span></figcaption>
                   <p class="diagram-scroll-hint">← 도식이 넓습니다. 좌우로 스크롤하거나 클릭해 확대해 보세요. →</p>
                 </figure>
               </section>
               <section aria-labelledby="backup-implementation-title">
                 <p class="label">IMPLEMENTATION</p>
-                <h4 class="detail-title" id="backup-implementation-title">백업 실행과 결과 기록을 위한 백엔드 기능</h4>
+                <h4 class="detail-title" id="backup-implementation-title">정책·스케줄과 이력 조회를 위한 백엔드 구현</h4>
                 <div class="work-detail-list">
                   <div>
                     <h5>정책 · 스케줄</h5>
                     <ul>
-                       <li>전체·증분·차등 정책에 맞는 Bash 명령 구성</li>
-                       <li>커스텀 스케줄 생성과 수정 관리</li>
+                      <li>전체·증분·차등 정책에 맞는 Bash 명령 구성</li>
+                      <li>커스텀 스케줄 생성과 수정 관리</li>
                     </ul>
                   </div>
                   <div>
-                    <h5>실행 · 이력</h5>
+                    <h5>로그 · 복원</h5>
                     <ul>
-                      <li>장시간 작업의 비동기 분리</li>
-                      <li>결과 판독·검증·이력 보관과 복원 흐름</li>
                       <li>특정 로그 검색과 페이징</li>
+                      <li>복원 흐름과 결과 이력 관리</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5>결과 판독 · 검증</h5>
+                    <ul>
+                      <li>완료 후 결과 판독과 검증</li>
+                      <li>이력 보관 흐름 연결</li>
                     </ul>
                   </div>
                 </div>
               </section>
-              <section class="detail-page" data-page-kind="improvement" aria-labelledby="backup-restore-title">
-                <p class="label">IMPROVEMENT</p>
-                <h4 class="detail-title" id="backup-restore-title">백업 파일 생성 확인에서 복원 데이터 확인까지 점검 범위 확대</h4>
-                <div class="case-grid">
-                  <dl class="case-facts">
-                    <div><dt>점검 흐름</dt><dd><ul><li>초기 파일 생성·전송·로그 저장</li><li>최종 파일·로그 오류 점검</li></ul></dd></div>
-                    <div><dt>복원 확인</dt><dd><ul><li>DR 전송 후 복원 실행</li><li>복원 로그와 데이터 점검</li></ul></dd></div>
-                  </dl>
-                  <figure class="evidence-figure">
-                    <button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 복원 검증 흐름 확대"><img src="./assets/architecture/backup-restore-verification.svg" width="1320" height="600" alt="백업 파일 생성부터 복원 데이터 확인까지의 점검 흐름" loading="lazy"></button>
-                    <figcaption>백업 검증 흐름 · MySQL 복원 실험 요약</figcaption>
-                  </figure>
-                </div>
-                <div class="result"><strong>확인 범위</strong><ul><li>MySQL·Docker 실험에서 전체 복원 후 추가 데이터 0행 → 증분 적용 후 1행 복구 확인</li></ul></div>
+              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="backup-async-title">
+                <p class="label">TROUBLESHOOTING</p>
+                <h4 class="detail-title" id="backup-async-title">장시간 백업 작업과 요청 처리 분리</h4>
+                <div class="troubleshooting-grid"><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>백업 명령 실행·파일 전송 등 장시간 작업과 요청 처리 분리 필요</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>백업 작업 비동기 분리</li><li>정책별 명령 구성 후 SSH 원격 실행</li></ul></dd></div><div><dt>후속</dt><dd><ul><li>완료 후 결과 판독·검증·이력 기록 흐름 연결</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 작업 비동기 분리 흐름 확대"><img src="./assets/architecture/backup-async-flow.svg" width="1320" height="600" alt="요청 처리, 비동기 백업 실행, 결과 판독·검증·이력 기록의 흐름" loading="lazy"></button><figcaption>요청 처리와 백업 실행 분리 흐름</figcaption></figure></div><div class="result"><strong>결과</strong><ul><li>요청 흐름과 백업 실행을 분리하고 완료 후 결과 확인 흐름으로 연결</li></ul></div>
               </section>
+              <section class="detail-page" data-page-kind="improvement" aria-labelledby="backup-restore-title"><p class="label">IMPROVEMENT</p><h4 class="detail-title" id="backup-restore-title">백업 파일 생성 확인에서 복원 데이터 확인까지 점검 범위 확대</h4><div class="case-grid"><dl class="case-facts"><div><dt>점검 흐름</dt><dd><ul><li>초기 파일 생성·전송·로그 저장</li><li>최종 파일·로그 오류 점검</li></ul></dd></div><div><dt>복원 확인</dt><dd><ul><li>DR 전송 후 복원 실행</li><li>복원 로그와 데이터 점검</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 복원 검증 흐름 확대"><img src="./assets/architecture/backup-restore-verification.svg" width="1320" height="600" alt="백업 파일 생성부터 복원 데이터 확인까지의 점검 흐름" loading="lazy"></button><figcaption>백업 검증 흐름 · MySQL 복원 실험 요약</figcaption></figure></div><div class="result"><strong>확인 범위</strong><ul><li>MySQL·Docker 실험에서 전체 복원 후 추가 데이터 0행 → 증분 적용 후 1행 복구 확인</li></ul></div></section>
             </div>
           </details>
         </article>
 
         <article class="project" id="wallet" aria-labelledby="wallet-title">
           <div class="project-heading">
-            <span class="project-no">02</span>
+            <span class="project-no">03</span>
             <h3 id="wallet-title">모바일 디지털 지갑</h3>
             <span class="project-category">BACKEND / AUTHENTICATION</span>
           </div>
@@ -227,7 +296,7 @@
             </figure>
           </div>
           <details class="detail" open>
-            <summary>애플리케이션 아키텍처 · 구현 내용 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION</small></summary>
+            <summary>아키텍처 · 구현 · 트러블슈팅 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING</small></summary>
             <div class="detail-body">
               <section aria-labelledby="wallet-architecture-title">
                 <p class="label">APPLICATION ARCHITECTURE</p>
@@ -244,155 +313,23 @@
               </section>
               <section aria-labelledby="wallet-implementation-title">
                 <p class="label">IMPLEMENTATION</p>
-                <h4 class="detail-title" id="wallet-implementation-title">회원과 지갑 기능을 위한 백엔드 구현</h4>
+                <h4 class="detail-title" id="wallet-implementation-title">회원·지갑 API와 DB·API 문서화</h4>
                 <div class="work-detail-list">
                   <div>
                     <h5>회원 · 지갑 API</h5>
-                    <ul>
-                      <li>회원·프로필·지갑·연락처 API</li>
-                      <li>거래와 스테이킹 인증</li>
-                    </ul>
+                    <ul><li>회원·프로필·지갑·연락처 API</li><li>거래와 스테이킹 인증</li></ul>
                   </div>
                   <div>
                     <h5>인증 · 알림</h5>
-                    <ul>
-                      <li>SSE·QR 로그인과 RSA 기반 통신 암호화</li>
-                      <li>SMS·FCM 알림</li>
-                    </ul>
+                    <ul><li>SSE·QR 로그인과 RSA 기반 통신 암호화</li><li>SMS·FCM 알림</li></ul>
                   </div>
                   <div>
-                    <h5>보안 · 문서화</h5>
-                    <ul>
-                      <li>XSS 필터 오류 수정</li>
-                      <li>DB 구조와 API 문서화</li>
-                    </ul>
+                    <h5>DB · API 문서화</h5>
+                    <ul><li>DB 구조와 API 문서화</li></ul>
                   </div>
                 </div>
               </section>
-            </div>
-          </details>
-        </article>
-
-        <article class="project" id="integration" aria-labelledby="integration-title">
-          <div class="project-heading">
-            <span class="project-no">03</span>
-            <h3 id="integration-title">CMP · 외부 서비스 연동 · 성능 시험</h3>
-            <span class="project-category">INTEGRATION / VERIFICATION</span>
-          </div>
-          <div class="project-overview">
-            <div class="project-description">
-              <p class="project-meta">외부 API 연동 · 조건별 비교 시험</p>
-              <h4>외부 인증 API 연동과 데이터·동시 사용자 조건별 비교 업무</h4>
-              <ul>
-                <li>MVC에서 WebFlux로 전환하고 WebClient 공통 유틸로 외부 인증 API 연동</li>
-                <li>세션과 HttpOnly Cookie 기반 토큰 관리</li>
-                <li>테넌트별 Kubernetes 조회 개선과 조건별 응답 시간·P95·JVM 메모리·오류 비교</li>
-              </ul>
-              <p class="techline"><span>TECH</span> Java · Spring WebFlux · WebClient · Mono · NetBackup API</p>
-              <ul class="skill-icons" aria-label="사용 기술">
-                <li><img src="./assets/architecture/icons/java.svg" alt="">Java</li>
-                <li><img src="./assets/architecture/icons/spring.svg" alt="">Spring WebFlux</li>
-                <li><img src="./assets/architecture/icons/network.svg" alt="">WebClient · Mono</li>
-              </ul>
-            </div>
-            <figure class="project-visual work-visual">
-              <button class="image-button" type="button" data-enlarge data-diagram aria-label="외부 서비스 연동과 성능 시험 담당 기능 요약 확대">
-                <img src="./assets/architecture/integration-overview.svg" width="840" height="520" alt="외부 서비스 연동과 성능 시험의 담당 기능 요약 도식" loading="lazy">
-              </button>
-              <figcaption><span>담당 기능 요약</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-            </figure>
-          </div>
-          <details class="detail" open>
-            <summary>애플리케이션 아키텍처 · 구현 내용 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION</small></summary>
-            <div class="detail-body">
-              <section aria-labelledby="integration-architecture-title">
-                <p class="label">APPLICATION ARCHITECTURE</p>
-                <h4 class="detail-title" id="integration-architecture-title">외부 인증 연동과 조건별 시험을 위한 흐름</h4>
-                <figure class="application-architecture">
-                  <div class="application-map" tabindex="0" role="region" aria-label="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처. 가로 스크롤 가능">
-                    <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처 확대">
-                      <img src="./assets/architecture/integration-application.svg" width="1320" height="800" alt="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처: 세션과 토큰, 외부 인증 API, 조건별 시험 지표 흐름" loading="lazy">
-                    </button>
-                  </div>
-                  <figcaption><span>외부 인증 API · 세션과 토큰 · 조건별 비교</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-                  <p class="diagram-scroll-hint">← 도식이 넓습니다. 좌우로 스크롤하거나 클릭해 확대해 보세요. →</p>
-                </figure>
-              </section>
-              <section aria-labelledby="integration-implementation-title">
-                <p class="label">IMPLEMENTATION</p>
-                <h4 class="detail-title" id="integration-implementation-title">연동 처리와 조건별 시험을 위한 구현</h4>
-                <div class="work-detail-list">
-                  <div>
-                    <h5>외부 인증 연동</h5>
-                    <ul>
-                      <li>MVC에서 WebFlux로 전환</li>
-                       <li>WebClient 공통 유틸 기반 외부 인증 API 연동</li>
-                    </ul>
-                   </div>
-                   <div>
-                     <h5>테넌트 조회</h5>
-                     <ul>
-                       <li>NSS·NBU 조회 분리와 매핑 필터 적용</li>
-                       <li>페이지 처리와 API 로그 확인</li>
-                     </ul>
-                   </div>
-                  <div>
-                    <h5>세션 · 토큰</h5>
-                    <ul>
-                      <li>세션 관리</li>
-                      <li>HttpOnly Cookie 기반 토큰 관리</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5>조건별 시험</h5>
-                    <ul>
-                      <li>데이터와 동시 사용자 조건별 응답 시간·P95·JVM 메모리·오류 비교</li>
-                      <li>배포 문서와 시험 문서 작성</li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-              <section class="detail-page" data-page-kind="improvement" aria-labelledby="integration-improvement-title">
-                <p class="label">IMPROVEMENT</p>
-                <h4 class="detail-title" id="integration-improvement-title">WebFlux 전환 후 평균 응답시간 2초 → 584ms</h4>
-                <div class="case-grid">
-                  <dl class="case-facts">
-                    <div><dt>개편 기준</dt><dd><ul><li>MVC 평균 응답시간 2,000ms</li><li>프레임워크 혼용 시 라이브러리 충돌 가능성</li></ul></dd></div>
-                    <div><dt>조치</dt><dd><ul><li>WebFlux 단독 적용</li><li>WebClient 공통 유틸 구성</li></ul></dd></div>
-                  </dl>
-                  <figure class="evidence-figure">
-                    <button class="image-button" type="button" data-enlarge data-diagram aria-label="MVC와 WebFlux 응답시간 비교 확대"><img src="./assets/architecture/integration-response-comparison.svg" width="1320" height="600" alt="MVC 2000ms와 WebFlux 584ms 평균 응답시간 비교" loading="lazy"></button>
-                    <figcaption>응답시간 비교 기록</figcaption>
-                  </figure>
-                </div>
-                <p class="case-note">응답시간 비교 기록 기준 · 데이터 건수·동시 사용자 조건 미기재</p>
-                <div class="result"><strong>기록된 비교</strong><ul><li>MVC 평균 2,000ms → WebFlux 평균 584ms, 70.8% 감소</li></ul></div>
-              </section>
-              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="integration-troubleshooting-title">
-                <p class="label">TROUBLESHOOTING</p>
-                <h4 class="detail-title" id="integration-troubleshooting-title">테넌트·클러스터·namespace 매핑으로 백업 정책 조회 범위 조정</h4>
-                <div class="troubleshooting-grid">
-                  <dl class="case-facts troubleshooting-facts">
-                    <div><dt>문제</dt><dd><ul><li>Kubernetes 백업 정책이 모든 테넌트에 표시</li></ul></dd></div>
-                    <div><dt>점검</dt><dd><ul><li>페이지 처리와 API 로그 확인</li><li>NSS·NBU 조회 경로 분리</li></ul></dd></div>
-                    <div><dt>조치</dt><dd><ul><li>테넌트·클러스터·namespace 매핑 필터 적용</li><li>해당 테넌트 정책 조회 범위 조정</li></ul></dd></div>
-                  </dl>
-                  <figure class="evidence-figure">
-                    <button class="image-button" type="button" data-enlarge data-diagram aria-label="테넌트별 백업 정책 조회 흐름 확대"><img src="./assets/architecture/integration-tenant-policy.svg" width="1320" height="600" alt="NSS와 NBU 조회 분리 및 테넌트 매핑 필터를 통한 백업 정책 조회 흐름" loading="lazy"></button>
-                    <figcaption>정책 조회 범위 조정 흐름</figcaption>
-                  </figure>
-                </div>
-                <div class="result"><strong>결과</strong><ul><li>매핑 필터를 거쳐 해당 테넌트의 정책 조회 범위를 조정</li></ul></div>
-              </section>
-              <section class="detail-page" data-page-kind="benchmark" aria-labelledby="integration-benchmark-title">
-                <p class="label">BENCHMARK</p>
-                <h4 class="detail-title" id="integration-benchmark-title">Ubuntu 22.04.5와 RHEL 9.4 조건별 응답시간 비교</h4>
-                <div class="benchmark-context"><ul><li>동일 호스트 사양 · JVM 24GB · Postman 조건별 각 1분</li><li>3만·20만 건 · 동시 가상 사용자(VU) 1·5·10명</li></ul></div>
-                <div class="benchmark-table-wrap" tabindex="0" role="region" aria-label="Ubuntu와 RHEL 평균 응답시간 비교 표. 가로 스크롤 가능">
-                  <table class="benchmark-table"><caption>평균 응답시간 비교 (ms)</caption><thead><tr><th scope="col">건수</th><th scope="col">VU</th><th scope="col">Ubuntu 22.04.5</th><th scope="col">RHEL 9.4</th></tr></thead><tbody><tr><td>30,000</td><td>1</td><td>1,474</td><td>1,179</td></tr><tr><td>30,000</td><td>5</td><td>2,678</td><td>2,469</td></tr><tr><td>30,000</td><td>10</td><td>5,421</td><td>5,247</td></tr><tr><td>200,000</td><td>1</td><td>7,174</td><td>6,617</td></tr><tr><td>200,000</td><td>5</td><td>20,036</td><td>24,914</td></tr><tr><td>200,000</td><td>10</td><td>47,133</td><td>43,814</td></tr></tbody></table>
-                </div>
-                <div class="result"><strong>관찰</strong><ul><li>건수와 VU 증가에 따라 응답시간 지연</li><li>20만 건·VU 5에서 Ubuntu 평균이 더 짧음</li></ul></div>
-              </section>
+              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="wallet-xss-title"><p class="label">TROUBLESHOOTING</p><h4 class="detail-title" id="wallet-xss-title">입력값 필터 적용 오류 수정</h4><div class="troubleshooting-grid"><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>XSS 필터 미적용·처리 오류</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>XSS 필터 오류 수정</li></ul></dd></div><div><dt>후속</dt><dd><ul><li>XSS 필터 최적화</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="입력값 필터 수정 흐름 확대"><img src="./assets/architecture/wallet-xss-flow.svg" width="1320" height="600" alt="입력값 필터 수정 흐름" loading="lazy"></button><figcaption>입력값 필터 수정 흐름</figcaption></figure></div><div class="result"><strong>후속</strong><ul><li>XSS 필터 최적화 작업으로 이어짐</li></ul></div></section>
             </div>
           </details>
         </article>

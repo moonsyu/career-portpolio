@@ -82,7 +82,7 @@ def overview(filename, title, subtitle, items):
 
 
 def backup():
-    d=Diagram('Arabica · 원격 백업 관리 · 담당 기능 흐름','장문수가 백엔드에서 백업 요청과 일정에 따라 정책별 명령을 구성하고 Apache MINA SSHD와 Bash로 원격 작업을 실행한 담당 기능 중심 설명도.')
+    d=Diagram('Arabica · 원격 백업 관리 · 담당 기능 흐름','백엔드에서 백업 요청과 일정에 따라 정책별 명령을 구성하고 SSH와 Bash로 원격 작업을 실행하는 담당 기능 중심 설명도.')
     d.text(660,49,'Arabica · 원격 백업 관리 · 담당 기능 흐름',28,True)
     d.node('user-round',103,205,'사용자',['정책 · 일정','실행 · 복원 요청'],size=70)
     d.box(259,99,730,378,'Arabica · Java 17 · Spring Boot 3.2.5')
@@ -108,6 +108,38 @@ def backup():
     d.arrow([(620,487),(620,573)],'이력 기록·조회',(620,535),both=True)
     d.text(660,781,'정책 설정 → 원격 작업 → 결과 확인',20,fill='#52627b')
     return d.save('backup-application.svg')
+
+
+def backup_async_flow():
+    d=Diagram('백업 작업 비동기 분리 흐름','장시간 백업 명령 실행과 파일 전송을 요청 처리와 분리하고, 완료 후 결과 판독·검증·이력 기록으로 연결하는 흐름도.',600)
+    d.text(660,58,'백업 작업 비동기 분리 흐름',30,True)
+    steps=[('요청 처리','백업 요청 접수'),('비동기 백업 실행','정책별 명령 구성 · SSH 원격 실행'),('결과 연결','판독 · 검증 · 이력 기록')]
+    icons=['user-round','file-code','database']
+    for i,((title,sub),icon_name) in enumerate(zip(steps,icons)):
+        x=105+i*420
+        d.box(x,206,290,180,fill='#f5f8fd',stroke='#c9d6e8',width=1.5)
+        d.icon(icon_name,x+113,235,64,color='#2855bf')
+        d.text(x+145,333,title,23,True)
+        d.text(x+145,368,sub,18,fill='#52627b')
+        if i<2:d.arrow([(x+292,296),(x+408,296)])
+    d.text(660,496,'요청 흐름과 장시간 백업 작업을 분리한 후 결과 확인 흐름으로 연결',21,fill='#52627b')
+    return d.save('backup-async-flow.svg')
+
+
+def wallet_xss_flow():
+    d=Diagram('입력값 필터 수정 흐름','기록된 XSS 필터 미적용·처리 오류를 수정하고 후속 최적화로 이어진 3단계 작업 흐름도.',600)
+    d.text(660,58,'입력값 필터 수정 흐름',30,True)
+    steps=[('문제','XSS 필터 미적용 · 처리 오류'),('조치','XSS 필터 오류 수정'),('후속','XSS 필터 최적화')]
+    icons=['file-code','save','package']
+    for i,((title,sub),icon_name) in enumerate(zip(steps,icons)):
+        x=105+i*420
+        d.box(x,206,290,180,fill='#f5f8fd',stroke='#c9d6e8',width=1.5)
+        d.icon(icon_name,x+113,235,64,color='#2855bf')
+        d.text(x+145,333,title,23,True)
+        d.text(x+145,368,sub,18,fill='#52627b')
+        if i<2:d.arrow([(x+292,296),(x+408,296)])
+    d.text(660,496,'기록된 오류 수정과 최적화 작업의 순서를 정리한 도식',21,fill='#52627b')
+    return d.save('wallet-xss-flow.svg')
 
 
 def wallet():
@@ -233,5 +265,5 @@ if __name__ == '__main__':
     used |= overview('backup-overview.svg','Arabica · 원격 백업 관리','정책 · 실행 · 결과를 연결하는 백엔드',[('file-code','백업 정책','전체 · 증분 · 차등'),('linux','원격 실행','SSH · Bash'),('database','이력 · 복원','검증 · 검색 · 보관')])
     used |= overview('wallet-overview.svg','모바일 디지털 지갑','인증 · 데이터 보호 · 알림 기능 개발',[('user-round','회원 · 지갑','서비스 API'),('network','인증 · 보안','SSE · QR · RSA'),('cloud','알림','SMS · FCM')])
     used |= overview('integration-overview.svg','CMP · 외부 서비스 연동','인증 API 연동과 조건별 성능 비교',[('spring','WebFlux','구조 전환'),('network','인증 연동','WebClient 공통화'),('server','성능 시험','응답 · 메모리 · 오류')])
-    for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy]:used |= build()
-    print('Built 9 diagrams; icons:', ', '.join(sorted(used)))
+    for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy,backup_async_flow,wallet_xss_flow]:used |= build()
+    print('Built 11 diagrams; icons:', ', '.join(sorted(used)))

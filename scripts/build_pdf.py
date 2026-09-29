@@ -192,10 +192,11 @@ const jobs = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
         page_number = 2
         for number, project in enumerate(projects, 1):
             text(f'0{number} / WORK', M, 32, size=9, bold=True, color=BLUE)
-            text(project.one(tag='h3').text(), M, 52, size=23, bold=True)
+            heading_bottom = text(project.one(tag='h3').text(), M, 52, size=23, bold=True)
             desc = project.one(cls='project-description')
-            text(desc.one(cls='project-meta').text(), M, 96, size=9, color=MUTED)
-            y = text(desc.one(tag='h4').text(), M, 118, size=12, bold=True)
+            meta_bottom = text(desc.one(cls='project-meta').text(), M, heading_bottom+8,
+                               size=9, color=MUTED)
+            y = text(desc.one(tag='h4').text(), M, meta_bottom+8, size=12, bold=True)
             y += 9
             for item in desc.select(tag='ul')[0].select(tag='li'):
                 y = text('• ' + item.text(), M, y, size=10.5, bold=True, leading=16) + 5
@@ -308,6 +309,7 @@ const jobs = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
                              bold=True, color=MUTED) + 8
                 footer(page_number)
                 page_number += 1
+    assert page_number - 1 == page_count, (page_number - 1, page_count)
     pdf.save()
     print(f'Created {OUTPUT} ({page_count} pages)')
 

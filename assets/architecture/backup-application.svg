@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1320" height="800" viewBox="0 0 1320 800" role="img" aria-labelledby="title desc">
-<title id="title">Arabica · 원격 백업 관리 · 담당 기능 흐름</title><desc id="desc">장문수가 백엔드에서 백업 요청과 일정에 따라 정책별 명령을 구성하고 Apache MINA SSHD와 Bash로 원격 작업을 실행한 담당 기능 중심 설명도.</desc>
+<title id="title">Arabica · 원격 백업 관리 · 담당 기능 흐름</title><desc id="desc">백엔드에서 백업 요청과 일정에 따라 정책별 명령을 구성하고 SSH와 Bash로 원격 작업을 실행하는 담당 기능 중심 설명도.</desc>
 <!-- Technology icons: Devicon (MIT); functional icons: Lucide (ISC). See accompanying license files. -->
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#20252c"/></marker><marker id="arrow-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 10 0 L 0 5 L 10 10 Z" fill="#20252c"/></marker><symbol id="icon-database" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse xmlns="http://www.w3.org/2000/svg" cx="12" cy="5" rx="9" ry="3" />
   <path xmlns="http://www.w3.org/2000/svg" d="M3 5V19A9 3 0 0 0 21 19V5" />
