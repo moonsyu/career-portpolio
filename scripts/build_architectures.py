@@ -66,18 +66,19 @@ class Diagram:
 
 
 
-def overview(filename, title, subtitle, items):
-    d=Diagram(title, subtitle, 520, 840)
+def overview(filename, title, subtitle, items, footer=True):
+    d=Diagram(title, subtitle or title, 520 if footer else 440, 840)
     d.text(46,62,title,32,True,anchor='start')
-    d.text(46,101,subtitle,21,anchor='start',fill='#52627b')
+    if subtitle:d.text(46,101,subtitle,21,anchor='start',fill='#52627b')
+    offset=0 if subtitle else -40
     for i,(icon,label,detail) in enumerate(items):
         x=40+i*270
-        d.box(x,150,220,282,fill='#f5f8fd',stroke='#c9d6e8',width=1.5)
-        d.icon(icon,x+70,190,80,color='#2855bf')
-        d.text(x+110,322,label,25,True)
-        d.text(x+110,365,detail,20,fill='#52627b')
-        d.text(x+22,177,f'0{i+1}',15,True,anchor='start',fill='#2855bf')
-    d.text(46,482,'Java · Spring 기반 백엔드 담당 기능',19,anchor='start',fill='#52627b')
+        d.box(x,150+offset,220,282,fill='#f5f8fd',stroke='#c9d6e8',width=1.5)
+        d.icon(icon,x+70,190+offset,80,color='#2855bf')
+        d.text(x+110,322+offset,label,25,True)
+        d.text(x+110,365+offset,detail,20,fill='#52627b')
+        d.text(x+22,177+offset,f'0{i+1}',15,True,anchor='start',fill='#2855bf')
+    if footer:d.text(46,482,'Java · Spring 기반 백엔드 담당 기능',19,anchor='start',fill='#52627b')
     return d.save(filename)
 
 
@@ -158,10 +159,42 @@ def submission_flow(filename,title,items):
 
 
 def backup_async_flow():
-    return submission_flow('backup-async-flow.svg','백업 작업 비동기 분리 흐름',[
-        ('user-round','요청 처리',['백업 요청 접수']),
-        ('terminal','비동기 백업 실행',['정책별 명령 구성','SSH 원격 실행']),
-        ('database','결과 연결',['결과 판독·검증','실행 이력 기록'])])
+    title='DB 크기 증가에 따른 스레드 점유와 백업 결과 확인'
+    description='DB 크기가 커질수록 백업·전송 시간이 증가해 동기 백업 흐름의 요청 스레드를 장시간 점유. 백업 작업을 비동기로 분리하고 완료 후 결과 판독·검증·이력 기록을 통해 백업 진행 결과를 확인.'
+    rows=[('문제 · DB 크기 증가에 따른 스레드 점유',[
+        ('database','DB 크기 증가',['백업 대상 데이터 증가']),
+        ('terminal','백업 시간 증가',['백업 · 전송 작업 장기화']),
+        ('user-round','스레드 점유',['요청 스레드 장시간 점유'])]),
+        ('조치 · 비동기 실행과 완료 결과 확인',[
+        ('workflow','실행 분리',['요청 처리와 백업 작업 분리','백업 작업 비동기 실행']),
+        ('shield-check','완료 결과 검증',['백업 완료 후 결과 판독','백업 결과 검증']),
+        ('database','진행 결과 확인',['실행 이력 기록','백업 진행 결과 확인'])])]
+    used=set()
+    d=Diagram(title,description,860)
+    for row,(heading,items) in enumerate(rows):
+        y=60+407*row
+        d.text(40,y,heading,30,True,anchor='start',fill=ARCH_BLUE)
+        for i,(icon,label,lines) in enumerate(items):
+            x=40+440*i;top=y+32
+            d.box(x,top,360,315,fill='#f7f9fc',stroke='#c9d6e8',width=1.6)
+            d.icon(icon,x+142,top+38,76,color=ARCH_BLUE)
+            d.text(x+180,top+166,label,29,True)
+            for j,line in enumerate(lines):d.text(x+180,top+222+j*40,line,23,fill=ARCH_BLUE)
+            if i<2:d.arrow([(x+368,top+153),(x+432,top+153)])
+    used|=d.save('backup-async-flow.svg')
+    d=Diagram(title,description,1370,640)
+    for row,(_,items) in enumerate(rows):
+        y=50+675*row
+        d.text(32,y,'문제 · 장시간 스레드 점유' if row==0 else '조치 · 실행 분리와 결과 확인',33,True,anchor='start',fill=ARCH_BLUE)
+        for i,(icon,label,lines) in enumerate(items):
+            top=y+40+200*i
+            d.box(32,top,576,165,fill='#f7f9fc',stroke='#c9d6e8',width=1.6)
+            d.icon(icon,60,top+46,70,color=ARCH_BLUE)
+            d.text(166,top+48,label,31,True,anchor='start')
+            for j,line in enumerate(lines):d.text(166,top+96+j*35,line,25,anchor='start',fill=ARCH_BLUE)
+            if i<2:d.arrow([(320,top+171),(320,top+194)])
+    used|=d.save('backup-async-flow-mobile.svg')
+    return used
 
 
 def wallet_xss_flow():
@@ -370,6 +403,6 @@ if __name__ == '__main__':
     used=set()
     used |= overview('backup-overview.svg','Arabica · 원격 백업 관리','정책 · 실행 · 결과를 연결하는 백엔드',[('file-code','백업 정책','전체 · 증분 · 차등'),('linux','원격 실행','SSH · Bash'),('database','이력 · 복원','검증 · 검색 · 보관')])
     used |= overview('wallet-overview.svg','모바일 디지털 지갑','인증 · 데이터 보호 · 알림 기능 개발',[('user-round','회원 · 지갑','서비스 API'),('network','인증 · 보안','SSE · QR · RSA'),('cloud','알림','SMS · FCM')])
-    used |= overview('integration-overview.svg','CMP · 외부 서비스 연동','인증 API 연동과 조건별 성능 비교',[('spring','WebFlux','구조 전환'),('network','인증 연동','WebClient 공통화'),('server','성능 시험','응답 · 메모리 · 오류')])
+    used |= overview('integration-overview.svg','CMP · 외부 서비스 연동','',[('spring','WebFlux','구조 전환'),('network','인증 연동','WebClient 공통화'),('server','성능 시험','응답 · 메모리 · 오류')],footer=False)
     for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy,backup_async_flow,wallet_xss_flow,implementation_diagrams,integration_benchmark,backup_ai_development]:used |= build()
-    print('Built 15 diagrams; icons:', ', '.join(sorted(used)))
+    print('Built 16 diagrams; icons:', ', '.join(sorted(used)))

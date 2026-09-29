@@ -11,7 +11,7 @@
   <meta property="og:description" content="Java 백엔드 업무 기록">
   <meta property="og:url" content="https://moonsyu.github.io/career-portpolio/">
   <title>장문수 | 경력기술서</title>
-  <link rel="stylesheet" href="./styles.css?v=submission-1">
+  <link rel="stylesheet" href="./styles.css?v=responsive-1">
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -104,15 +104,15 @@
         </div>
 
         <div class="project-index" aria-label="업무 바로가기">
-          <a href="#backup"><strong>01</strong><span>Arabica · 원격 백업 관리</span><small>BACKEND / AUTOMATION</small></a>
-          <a href="#integration"><strong>02</strong><span>CMP · 외부 서비스 연동 · 성능 시험</span><small>INTEGRATION / VERIFICATION</small></a>
-          <a href="#wallet"><strong>03</strong><span>모바일 디지털 지갑</span><small>BACKEND / AUTHENTICATION</small></a>
+          <a href="#backup"><strong>01</strong><span class="project-index-copy"><span class="project-index-name">Arabica</span><span class="project-index-description">DB 백업 자동화 시스템 구축</span></span><small>BACKEND / AUTOMATION</small></a>
+          <a href="#integration"><strong>02</strong><span class="project-index-copy"><span class="project-index-name">CMP</span><span class="project-index-description">외부 서비스 연동 BenchMark</span></span><small>INTEGRATION / VERIFICATION</small></a>
+          <a href="#wallet"><strong>03</strong><span class="project-index-copy"><span class="project-index-name">Wallet</span><span class="project-index-description">Dcommerce 시스템 백엔드 API 구축</span></span><small>BACKEND / AUTHENTICATION</small></a>
         </div>
 
         <article class="project" id="backup" aria-labelledby="backup-title">
           <div class="project-heading">
             <span class="project-no">01</span>
-            <h3 id="backup-title">Arabica · 원격 백업 관리</h3>
+            <div class="project-title-group"><h3 id="backup-title">Arabica</h3><p class="project-subtitle">DB 백업 자동화 시스템 구축</p></div>
             <span class="project-category">BACKEND / AUTOMATION</span>
           </div>
           <div class="project-overview">
@@ -133,7 +133,7 @@
             </div>
           </div>
           <details class="detail" open>
-            <summary>아키텍처 · 구현 · 트러블슈팅 · 개선 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING · IMPROVEMENT</small></summary>
+            <summary>아키텍처 · 구현 · 트러블슈팅 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING</small></summary>
             <div class="detail-body">
               <section aria-labelledby="backup-architecture-title">
                 <p class="label">APPLICATION ARCHITECTURE</p>
@@ -167,9 +167,8 @@
               <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="backup-async-title">
                 <p class="label">TROUBLESHOOTING</p>
                 <h4 class="detail-title" id="backup-async-title">장시간 백업 작업과 요청 처리 분리</h4>
-                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="요청 처리와 비동기 백업 실행 및 이력 기록 확대"><img src="./assets/architecture/backup-async-flow.svg?v=submission-1" width="1320" height="440" alt="요청 처리와 비동기 백업 실행 및 이력 기록" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>장시간 백업 명령·파일 전송과 요청 처리 분리 필요</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>백업 작업 비동기 분리 · 정책별 명령 구성과 SSH 실행</li><li>완료 후 결과 판독·검증·이력 기록</li></ul></dd></div></dl></div>
+                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="DB 크기 증가에 따른 스레드 점유 문제와 비동기 실행·결과 확인 흐름 확대"><picture><source media="(max-width: 760px)" srcset="./assets/architecture/backup-async-flow-mobile.svg?v=responsive-1" width="640" height="1370"><img src="./assets/architecture/backup-async-flow.svg?v=responsive-1" width="1320" height="860" alt="DB 크기 증가로 백업 시간이 늘어나 요청 스레드가 장시간 점유되는 문제. 백업 작업을 비동기로 분리하고 완료 후 결과 판독·검증·이력 기록으로 백업 진행 결과 확인" loading="lazy"></picture></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>DB 크기 증가로 백업·전송 시간이 길어져 요청 스레드를 장시간 점유</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>백업 작업 비동기 분리 · 정책별 명령 구성과 SSH 실행</li><li>완료 후 결과 판독·검증·이력 기록을 통해 백업 진행 결과 확인</li></ul></dd></div></dl></div>
               </section>
-              <section class="detail-page" data-page-kind="improvement" aria-labelledby="backup-restore-title"><p class="label">IMPROVEMENT</p><h4 class="detail-title" id="backup-restore-title">백업 파일 생성 확인에서 복원 데이터 확인까지 점검 범위 확대</h4><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 점검 범위 확대와 MySQL·Docker 전체·증분 복원 실험 확대"><img src="./assets/architecture/backup-restore-verification.svg?v=submission-1" width="1320" height="600" alt="백업 점검 범위 확대와 MySQL·Docker 전체·증분 복원 실험" loading="lazy"></button></figure></section>
             </div>
           </details>
         </article>
@@ -177,13 +176,13 @@
         <article class="project" id="integration" aria-labelledby="integration-title">
           <div class="project-heading">
             <span class="project-no">02</span>
-            <h3 id="integration-title">CMP · 외부 서비스 연동 · 성능 시험</h3>
+            <div class="project-title-group"><h3 id="integration-title">CMP</h3><p class="project-subtitle">외부 서비스 연동 BenchMark</p></div>
             <span class="project-category">INTEGRATION / VERIFICATION</span>
           </div>
           <div class="project-overview">
             <figure class="project-visual work-visual">
               <button class="image-button" type="button" data-enlarge data-diagram aria-label="외부 서비스 연동과 성능 시험 담당 기능 요약 확대">
-                <img src="./assets/architecture/integration-overview.svg" width="840" height="520" alt="외부 서비스 연동과 성능 시험의 담당 기능 요약 도식" loading="lazy">
+                <img src="./assets/architecture/integration-overview.svg?v=responsive-1" width="840" height="440" alt="외부 서비스 연동과 성능 시험의 담당 기능 요약 도식" loading="lazy">
               </button>
             </figure>
             <div class="project-tech">
@@ -227,7 +226,7 @@
         <article class="project" id="wallet" aria-labelledby="wallet-title">
           <div class="project-heading">
             <span class="project-no">03</span>
-            <h3 id="wallet-title">모바일 디지털 지갑</h3>
+            <div class="project-title-group"><h3 id="wallet-title">Wallet</h3><p class="project-subtitle">Dcommerce 시스템 백엔드 API 구축</p></div>
             <span class="project-category">BACKEND / AUTHENTICATION</span>
           </div>
           <div class="project-overview">
