@@ -207,25 +207,29 @@ def wallet_xss_flow():
 def wallet():
     d=Diagram('모바일 디지털 지갑 · 애플리케이션 아키텍처',
         '사용자 앱·Dashboard·내부 서버의 요청이 Spring Security 복호화·입력 검증과 Dispatcher를 거쳐 업무 Bean으로 연결되는 프로젝트 구조. 일반 데이터 접근은 MyBatis DAO·Mapper와 PostgreSQL, 알림은 외부 SMS·FCM 서비스를 사용한다.',960)
-    d.box(310,70,990,465,'Application Services · Wallet',width=2.8)
+    d.box(330,70,970,465,'Application Services · Wallet',width=2.8)
     d.box(25,130,215,590,'Clients',width=2.8)
-    for y,icon,title in [(190,'smartphone','사용자 앱'),(365,'globe','Dashboard'),(540,'server','내부 서버')]:
-        d.node(icon,132,y,title,size=64,color=ARCH_BLUE)
-    web_service(d,350,145,330,340,'Java · Spring Boot',
+    for y,icon,title in [(190,'server','내부 서버'),(365,'globe','Dashboard'),(540,'smartphone','사용자 앱')]:
+        subtitle='요청 · 알림 수신' if icon=='smartphone' else None
+        d.node(icon,132,y,title,subtitle,size=64,color=ARCH_BLUE)
+    web_service(d,370,145,310,340,'Java · Spring Boot',
         ['Security · 복호화·입력 검증','Dispatcher · 업무 Bean 선택'])
     d.node('wallet',850,215,'업무 Bean',['회원 · 지갑 · 인증','MyBatis DAO · Mapper'],size=76,color=ARCH_BLUE)
     d.node('bell-ring',1150,215,'알림 모듈',['SMS · FCM 발송 요청'],size=76,color=ARCH_BLUE)
-    external_service(d,670,650,320,'Database','postgresql','PostgreSQL',['서비스 데이터'])
-    external_service(d,1040,650,260,'Messaging Service','firebase','SMS · FCM',['외부 알림 발송'])
-    d.arrow([(240,232),(285,232),(285,275),(350,275)])
-    d.arrow([(240,407),(285,407),(285,275)])
-    d.arrow([(240,582),(285,582),(285,407)])
-    d.text(296,215,'HTTP',18,fill=ARCH_BLUE)
+    external_service(d,690,650,320,'Database','postgresql','PostgreSQL',['서비스 데이터'])
+    external_service(d,1020,650,260,'Messaging Service','firebase','SMS · FCM',['외부 알림 발송'])
+    # Shared request bus: no arrowheads at joins or between clients.
+    d.parts.append('<path d="M 240 232 H 285 V 582 H 240 M 240 407 H 285" fill="none" stroke="#20252c" stroke-width="2.8" stroke-linejoin="round"/>')
+    for y in (275,407):
+        d.parts.append(f'<circle cx="285" cy="{y}" r="4" fill="#20252c"/>')
+    d.arrow([(285,275),(370,275)])
+    d.text(285,210,'HTTP 요청',18,fill=ARCH_BLUE)
     d.arrow([(680,253),(800,253)])
     d.arrow([(900,253),(1100,253)])
     d.arrow([(850,407),(850,650)],'MyBatis / SQL',(850,592),both=True)
     d.arrow([(1150,381),(1150,650)],'발송 요청',(1150,592))
-    d.arrow([(1170,870),(1170,930),(10,930),(10,232),(25,232)],'사용자에게 알림 전달',(610,918))
+    # Deliver notifications at the user-app end of Clients without circling the canvas.
+    d.arrow([(1150,870),(1150,920),(132,920),(132,720)],'사용자 앱으로 알림 전달',(570,908))
     return d.save('wallet-application.svg')
 
 
