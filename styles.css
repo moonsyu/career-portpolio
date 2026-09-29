@@ -175,3 +175,16 @@ strong,b{font-weight:750;color:var(--ink)}
 .project-tech .skill-icons{margin:0}
 .application-architecture{background:#fff}
 @media(max-width:760px){.project-overview{gap:18px}.project-overview .work-visual{width:100%}.project-tech .techline{padding-top:16px}}
+
+/* Submission view: diagrams lead each project detail. */
+.project-overview .work-visual{width:100%}
+.detail-page .troubleshooting-grid,.detail-page .case-grid{display:flex;flex-direction:column;gap:24px}
+.evidence-figure{width:100%;max-width:none;margin:0;padding:0;background:#fff;overflow:hidden}
+.evidence-figure img{display:block;width:100%;height:auto;max-height:none}
+.detail-page .case-facts{display:grid;grid-template-columns:1fr 1fr;gap:30px;width:100%;margin:0}
+.detail-page .case-facts>div{border-top:2px solid var(--line);padding-top:18px}
+.detail-page .case-facts dt{font-size:21px}
+.detail-page .case-facts dd{font-size:19px;line-height:1.75}
+.benchmark-context{background:transparent;border:0;padding:0;margin-bottom:22px}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:760px){.detail-page .case-facts{grid-template-columns:1fr;gap:18px}.detail-page .case-facts dd{font-size:17px}.detail-page .troubleshooting-grid{gap:20px}.detail-page .case-facts dt{font-size:19px}}

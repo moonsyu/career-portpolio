@@ -11,7 +11,7 @@
   <meta property="og:description" content="Java 백엔드 업무 기록">
   <meta property="og:url" content="https://moonsyu.github.io/career-portpolio/">
   <title>장문수 | 경력기술서</title>
-  <link rel="stylesheet" href="./styles.css?v=reference-1">
+  <link rel="stylesheet" href="./styles.css?v=submission-1">
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -131,7 +131,7 @@
             </div>
           </div>
           <details class="detail" open>
-            <summary>아키텍처 · 구현 · 트러블슈팅 · 성능 시험 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING · BENCHMARK</small></summary>
+            <summary>아키텍처 · 트러블슈팅 · 성능 시험 <small>APPLICATION ARCHITECTURE · TROUBLESHOOTING · BENCHMARK</small></summary>
             <div class="detail-body">
               <section aria-labelledby="integration-architecture-title">
                 <p class="label">APPLICATION ARCHITECTURE</p>
@@ -144,29 +144,17 @@
                   </div>
                 </figure>
               </section>
-              <section aria-labelledby="integration-implementation-title">
-                <p class="label">IMPLEMENTATION</p>
-                <h4 class="detail-title" id="integration-implementation-title">연동 처리와 조건별 시험을 위한 구현</h4>
-                <div class="work-detail-list">
-                  <div>
-                    <h5>외부 인증 연동</h5>
-                    <ul>
-                       <li>WebClient 공통 유틸 기반 외부 인증 API 연동</li>
-                       <li>세션 관리와 HttpOnly Cookie 기반 토큰 관리</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5>시험 문서</h5>
-                    <ul>
-                      <li>조건별 응답시간·P95·JVM 메모리·오류 비교</li>
-                      <li>배포 문서와 시험 문서 작성</li>
-                    </ul>
-                  </div>
-                </div>
+              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="integration-improvement-title">
+                <p class="label">TROUBLESHOOTING</p>
+                <h4 class="detail-title" id="integration-improvement-title">외부 API 응답 지연과 요청 처리 구조 개선</h4>
+                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="MVC 동기 처리의 요청 스레드 점유와 Spring WebFlux 전환 확대"><img src="./assets/architecture/integration-response-comparison.svg?v=submission-1" width="1320" height="740" alt="MVC 동기 처리의 요청 스레드 점유와 Spring WebFlux 전환" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>기존 MVC 동기 처리에서 외부 API 응답 대기 중 요청 스레드 점유</li><li>요청 스레드 점유에 따른 응답 지연으로 파악</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>MVC → Spring WebFlux로 프레임워크 환경 교체</li></ul></dd></div></dl></div>
               </section>
-              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="integration-improvement-title"><p class="label">TROUBLESHOOTING</p><h4 class="detail-title" id="integration-improvement-title">외부 API 응답 지연과 요청 처리 구조 개선</h4><div class="troubleshooting-grid"><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>MVC 평균 응답시간 2,000ms 기록</li></ul></dd></div><div><dt>검토 기준</dt><dd><ul><li>프레임워크 혼용 시 라이브러리 충돌 가능성 검토</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>WebFlux 단독 적용</li><li>WebClient 공통 유틸 구성</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="MVC와 WebFlux 응답시간 비교 확대"><img src="./assets/architecture/integration-response-comparison.svg" width="1320" height="600" alt="MVC 2000ms와 WebFlux 584ms 평균 응답시간 비교" loading="lazy"></button><figcaption>응답시간 비교 기록</figcaption></figure></div><p class="case-note">응답시간 비교 기록 기준 · 데이터 건수·동시 사용자 조건 미기재</p><div class="result"><strong>결과</strong><ul><li>WebFlux 평균 584ms 기록 · MVC 평균 대비 70.8% 감소</li></ul></div></section>
-              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="integration-troubleshooting-title"><p class="label">TROUBLESHOOTING</p><h4 class="detail-title" id="integration-troubleshooting-title">테넌트·클러스터·namespace 매핑으로 백업 정책 조회 범위 조정</h4><div class="troubleshooting-grid"><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>Kubernetes 백업 정책이 모든 테넌트에 표시</li></ul></dd></div><div><dt>점검</dt><dd><ul><li>NSS·NBU 조회 경로 분리</li><li>페이지 처리와 API 로그 확인</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>테넌트·클러스터·namespace 매핑 필터 적용</li><li>해당 테넌트 정책 조회 범위 조정</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="테넌트별 백업 정책 조회 흐름 확대"><img src="./assets/architecture/integration-tenant-policy.svg" width="1320" height="600" alt="NSS와 NBU 조회 분리 및 테넌트 매핑 필터를 통한 백업 정책 조회 흐름" loading="lazy"></button><figcaption>정책 조회 범위 조정 흐름</figcaption></figure></div><div class="result"><strong>결과</strong><ul><li>매핑 필터를 거쳐 해당 테넌트의 정책 조회 범위를 조정</li></ul></div></section>
-              <section class="detail-page" data-page-kind="benchmark" aria-labelledby="integration-benchmark-title"><p class="label">BENCHMARK</p><h4 class="detail-title" id="integration-benchmark-title">Ubuntu 22.04.5와 RHEL 9.4 조건별 응답시간 비교</h4><div class="benchmark-context"><ul><li>동일 호스트 사양 · JVM 24GB · Postman 조건별 각 1분</li><li>3만·20만 건 · 동시 가상 사용자(VU) 1·5·10명</li></ul></div><div class="benchmark-table-wrap" tabindex="0" role="region" aria-label="Ubuntu와 RHEL 평균 응답시간 비교 표. 가로 스크롤 가능"><table class="benchmark-table"><caption>평균 응답시간 비교 (ms)</caption><thead><tr><th scope="col">건수</th><th scope="col">VU</th><th scope="col">Ubuntu 22.04.5</th><th scope="col">RHEL 9.4</th></tr></thead><tbody><tr><td>30,000</td><td>1</td><td>1,474</td><td>1,179</td></tr><tr><td>30,000</td><td>5</td><td>2,678</td><td>2,469</td></tr><tr><td>30,000</td><td>10</td><td>5,421</td><td>5,247</td></tr><tr><td>200,000</td><td>1</td><td>7,174</td><td>6,617</td></tr><tr><td>200,000</td><td>5</td><td>20,036</td><td>24,914</td></tr><tr><td>200,000</td><td>10</td><td>47,133</td><td>43,814</td></tr></tbody></table></div><div class="result"><strong>관찰</strong><ul><li>건수와 VU 증가에 따라 응답시간 지연</li><li>20만 건·VU 5에서 Ubuntu 평균이 더 짧음</li></ul></div></section>
+              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="integration-troubleshooting-title">
+                <p class="label">TROUBLESHOOTING</p>
+                <h4 class="detail-title" id="integration-troubleshooting-title">테넌트별 백업 정책 조회 범위 수정</h4>
+                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="NSS·NBU 조회 분리와 테넌트 매핑을 통한 정책 조회 확대"><img src="./assets/architecture/integration-tenant-policy.svg?v=submission-1" width="1320" height="600" alt="NSS·NBU 조회 분리와 테넌트 매핑을 통한 정책 조회" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>Kubernetes 백업 정책이 모든 테넌트에 표시</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>NSS·NBU 조회 경로 분리 및 페이지·API 로그 점검</li><li>테넌트·클러스터·namespace 매핑 필터 적용</li></ul></dd></div></dl></div>
+              </section>
+              <section class="detail-page" data-page-kind="benchmark" aria-labelledby="integration-benchmark-title"><p class="label">BENCHMARK</p><h4 class="detail-title" id="integration-benchmark-title">Ubuntu 22.04.5와 RHEL 9.4 조건별 응답시간 비교</h4><div class="benchmark-context"><ul><li>동일 호스트 사양 · JVM 24GB · Postman 조건별 각 1분</li><li>3만·20만 건 · 동시 가상 사용자(VU) 1·5·10명</li></ul></div><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="동일 호스트 사양의 Ubuntu와 RHEL 평균 응답시간 비교 확대"><img src="./assets/architecture/integration-benchmark.svg?v=submission-1" width="1320" height="760" alt="동일 호스트 사양의 Ubuntu와 RHEL 평균 응답시간 비교" loading="lazy"></button></figure><div class="visually-hidden"><table class="benchmark-table"><caption>평균 응답시간 비교 (ms)</caption><thead><tr><th scope="col">건수</th><th scope="col">VU</th><th scope="col">Ubuntu 22.04.5</th><th scope="col">RHEL 9.4</th></tr></thead><tbody><tr><td>30,000</td><td>1</td><td>1,474</td><td>1,179</td></tr><tr><td>30,000</td><td>5</td><td>2,678</td><td>2,469</td></tr><tr><td>30,000</td><td>10</td><td>5,421</td><td>5,247</td></tr><tr><td>200,000</td><td>1</td><td>7,174</td><td>6,617</td></tr><tr><td>200,000</td><td>5</td><td>20,036</td><td>24,914</td></tr><tr><td>200,000</td><td>10</td><td>47,133</td><td>43,814</td></tr></tbody></table></div></section>
             </div>
           </details>
         </article>
@@ -210,37 +198,13 @@
               </section>
               <section aria-labelledby="backup-implementation-title">
                 <p class="label">IMPLEMENTATION</p>
-                <h4 class="detail-title" id="backup-implementation-title">정책·스케줄과 이력 조회를 위한 백엔드 구현</h4>
-                <div class="work-detail-list">
-                  <div>
-                    <h5>정책 · 스케줄</h5>
-                    <ul>
-                      <li>전체·증분·차등 정책에 맞는 Bash 명령 구성</li>
-                      <li>커스텀 스케줄 생성과 수정 관리</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5>로그 · 복원</h5>
-                    <ul>
-                      <li>특정 로그 검색과 페이징</li>
-                      <li>복원 흐름과 결과 이력 관리</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5>결과 판독 · 검증</h5>
-                    <ul>
-                      <li>완료 후 결과 판독과 검증</li>
-                      <li>이력 보관 흐름 연결</li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
+                <h4 class="detail-title" id="backup-implementation-title">정책·스케줄과 이력 조회를 위한 백엔드 구현</h4><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 정책·스케줄, 로그·복원, 결과 판독·검증 구현 확대"><img src="./assets/architecture/backup-implementation.svg?v=submission-1" width="1320" height="440" alt="백업 정책·스케줄, 로그·복원, 결과 판독·검증 구현" loading="lazy"></button></figure></section>
               <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="backup-async-title">
                 <p class="label">TROUBLESHOOTING</p>
                 <h4 class="detail-title" id="backup-async-title">장시간 백업 작업과 요청 처리 분리</h4>
-                <div class="troubleshooting-grid"><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>백업 명령 실행·파일 전송 등 장시간 작업과 요청 처리 분리 필요</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>백업 작업 비동기 분리</li><li>정책별 명령 구성 후 SSH 원격 실행</li></ul></dd></div><div><dt>후속</dt><dd><ul><li>완료 후 결과 판독·검증·이력 기록 흐름 연결</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 작업 비동기 분리 흐름 확대"><img src="./assets/architecture/backup-async-flow.svg" width="1320" height="600" alt="요청 처리, 비동기 백업 실행, 결과 판독·검증·이력 기록의 흐름" loading="lazy"></button><figcaption>요청 처리와 백업 실행 분리 흐름</figcaption></figure></div><div class="result"><strong>결과</strong><ul><li>요청 흐름과 백업 실행을 분리하고 완료 후 결과 확인 흐름으로 연결</li></ul></div>
+                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="요청 처리와 비동기 백업 실행 및 이력 기록 확대"><img src="./assets/architecture/backup-async-flow.svg?v=submission-1" width="1320" height="440" alt="요청 처리와 비동기 백업 실행 및 이력 기록" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>장시간 백업 명령·파일 전송과 요청 처리 분리 필요</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>백업 작업 비동기 분리 · 정책별 명령 구성과 SSH 실행</li><li>완료 후 결과 판독·검증·이력 기록</li></ul></dd></div></dl></div>
               </section>
-              <section class="detail-page" data-page-kind="improvement" aria-labelledby="backup-restore-title"><p class="label">IMPROVEMENT</p><h4 class="detail-title" id="backup-restore-title">백업 파일 생성 확인에서 복원 데이터 확인까지 점검 범위 확대</h4><div class="case-grid"><dl class="case-facts"><div><dt>점검 흐름</dt><dd><ul><li>초기 파일 생성·전송·로그 저장</li><li>최종 파일·로그 오류 점검</li></ul></dd></div><div><dt>복원 확인</dt><dd><ul><li>DR 전송 후 복원 실행</li><li>복원 로그와 데이터 점검</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 복원 검증 흐름 확대"><img src="./assets/architecture/backup-restore-verification.svg" width="1320" height="600" alt="백업 파일 생성부터 복원 데이터 확인까지의 점검 흐름" loading="lazy"></button><figcaption>백업 검증 흐름 · MySQL 복원 실험 요약</figcaption></figure></div><div class="result"><strong>확인 범위</strong><ul><li>MySQL·Docker 실험에서 전체 복원 후 추가 데이터 0행 → 증분 적용 후 1행 복구 확인</li></ul></div></section>
+              <section class="detail-page" data-page-kind="improvement" aria-labelledby="backup-restore-title"><p class="label">IMPROVEMENT</p><h4 class="detail-title" id="backup-restore-title">백업 파일 생성 확인에서 복원 데이터 확인까지 점검 범위 확대</h4><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 점검 범위 확대와 MySQL·Docker 전체·증분 복원 실험 확대"><img src="./assets/architecture/backup-restore-verification.svg?v=submission-1" width="1320" height="600" alt="백업 점검 범위 확대와 MySQL·Docker 전체·증분 복원 실험" loading="lazy"></button></figure></section>
             </div>
           </details>
         </article>
@@ -283,23 +247,12 @@
               </section>
               <section aria-labelledby="wallet-implementation-title">
                 <p class="label">IMPLEMENTATION</p>
-                <h4 class="detail-title" id="wallet-implementation-title">회원·지갑 API와 DB·API 문서화</h4>
-                <div class="work-detail-list">
-                  <div>
-                    <h5>회원 · 지갑 API</h5>
-                    <ul><li>회원·프로필·지갑·연락처 API</li><li>거래와 스테이킹 인증</li></ul>
-                  </div>
-                  <div>
-                    <h5>인증 · 알림</h5>
-                    <ul><li>SSE·QR 로그인과 RSA 기반 통신 암호화</li><li>SMS·FCM 알림</li></ul>
-                  </div>
-                  <div>
-                    <h5>DB · API 문서화</h5>
-                    <ul><li>DB 구조와 API 문서화</li></ul>
-                  </div>
-                </div>
+                <h4 class="detail-title" id="wallet-implementation-title">회원·지갑 API와 DB·API 문서화</h4><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="회원·지갑 API, 인증·알림, DB·API 문서화 구현 확대"><img src="./assets/architecture/wallet-implementation.svg?v=submission-1" width="1320" height="440" alt="회원·지갑 API, 인증·알림, DB·API 문서화 구현" loading="lazy"></button></figure></section>
+              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="wallet-xss-title">
+                <p class="label">TROUBLESHOOTING</p>
+                <h4 class="detail-title" id="wallet-xss-title">입력값 필터 적용 오류 수정</h4>
+                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="XSS 필터 적용 오류 수정과 최적화 확대"><img src="./assets/architecture/wallet-xss-flow.svg?v=submission-1" width="1320" height="440" alt="XSS 필터 적용 오류 수정과 최적화" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>XSS 필터 미적용·처리 오류</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>XSS 필터 오류 수정</li><li>후속 필터 최적화</li></ul></dd></div></dl></div>
               </section>
-              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="wallet-xss-title"><p class="label">TROUBLESHOOTING</p><h4 class="detail-title" id="wallet-xss-title">입력값 필터 적용 오류 수정</h4><div class="troubleshooting-grid"><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>XSS 필터 미적용·처리 오류</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>XSS 필터 오류 수정</li></ul></dd></div><div><dt>후속</dt><dd><ul><li>XSS 필터 최적화</li></ul></dd></div></dl><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="입력값 필터 수정 흐름 확대"><img src="./assets/architecture/wallet-xss-flow.svg" width="1320" height="600" alt="입력값 필터 수정 흐름" loading="lazy"></button><figcaption>입력값 필터 수정 흐름</figcaption></figure></div><div class="result"><strong>후속</strong><ul><li>XSS 필터 최적화 작업으로 이어짐</li></ul></div></section>
             </div>
           </details>
         </article>

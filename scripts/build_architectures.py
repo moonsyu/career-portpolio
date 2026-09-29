@@ -145,36 +145,30 @@ def backup():
 
 
 
+def submission_flow(filename,title,items):
+    d=Diagram(title,' → '.join(label+': '+', '.join(lines) for _,label,lines in items),440)
+    for i,(icon,label,lines) in enumerate(items):
+        x=40+i*440
+        d.box(x,40,360,355,fill='#f7f9fc',stroke='#c9d6e8',width=1.6)
+        d.icon(icon,x+138,86,84,color=ARCH_BLUE)
+        d.text(x+180,226,label,29,True)
+        for j,line in enumerate(lines):d.text(x+180,287+j*39,line,23,fill='#2855bf')
+        if i<2:d.arrow([(x+367,210),(x+432,210)])
+    return d.save(filename)
+
+
 def backup_async_flow():
-    d=Diagram('백업 작업 비동기 분리 흐름','장시간 백업 명령 실행과 파일 전송을 요청 처리와 분리하고, 완료 후 결과 판독·검증·이력 기록으로 연결하는 흐름도.',600)
-    d.text(660,58,'백업 작업 비동기 분리 흐름',30,True)
-    steps=[('요청 처리','백업 요청 접수'),('비동기 백업 실행','정책별 명령 구성 · SSH 원격 실행'),('결과 연결','판독 · 검증 · 이력 기록')]
-    icons=['user-round','file-code','database']
-    for i,((title,sub),icon_name) in enumerate(zip(steps,icons)):
-        x=105+i*420
-        d.box(x,206,290,180,fill='#f5f8fd',stroke='#c9d6e8',width=1.5)
-        d.icon(icon_name,x+113,235,64,color='#2855bf')
-        d.text(x+145,333,title,23,True)
-        d.text(x+145,368,sub,18,fill='#52627b')
-        if i<2:d.arrow([(x+292,296),(x+408,296)])
-    d.text(660,496,'요청 흐름과 장시간 백업 작업을 분리한 후 결과 확인 흐름으로 연결',21,fill='#52627b')
-    return d.save('backup-async-flow.svg')
+    return submission_flow('backup-async-flow.svg','백업 작업 비동기 분리 흐름',[
+        ('user-round','요청 처리',['백업 요청 접수']),
+        ('terminal','비동기 백업 실행',['정책별 명령 구성','SSH 원격 실행']),
+        ('database','결과 연결',['결과 판독·검증','실행 이력 기록'])])
 
 
 def wallet_xss_flow():
-    d=Diagram('입력값 필터 수정 흐름','기록된 XSS 필터 미적용·처리 오류를 수정하고 후속 최적화로 이어진 3단계 작업 흐름도.',600)
-    d.text(660,58,'입력값 필터 수정 흐름',30,True)
-    steps=[('문제','XSS 필터 미적용 · 처리 오류'),('조치','XSS 필터 오류 수정'),('후속','XSS 필터 최적화')]
-    icons=['file-code','save','package']
-    for i,((title,sub),icon_name) in enumerate(zip(steps,icons)):
-        x=105+i*420
-        d.box(x,206,290,180,fill='#f5f8fd',stroke='#c9d6e8',width=1.5)
-        d.icon(icon_name,x+113,235,64,color='#2855bf')
-        d.text(x+145,333,title,23,True)
-        d.text(x+145,368,sub,18,fill='#52627b')
-        if i<2:d.arrow([(x+292,296),(x+408,296)])
-    d.text(660,496,'기록된 오류 수정과 최적화 작업의 순서를 정리한 도식',21,fill='#52627b')
-    return d.save('wallet-xss-flow.svg')
+    return submission_flow('wallet-xss-flow.svg','입력값 필터 적용 오류 수정',[
+        ('file-code','문제',['XSS 필터 미적용','입력값 처리 오류']),
+        ('shield-check','조치',['XSS 필터 오류 수정']),
+        ('workflow','후속',['XSS 필터 최적화'])])
 
 
 def wallet():
@@ -249,19 +243,28 @@ def backup_restore_verification():
 
 
 def integration_response_comparison():
-    d=Diagram('MVC와 WebFlux 응답시간 비교','기록된 평균 응답시간 2,000ms와 584ms를 가로 막대로 비교한 도식. 데이터 건수와 동시 사용자 조건은 기록되지 않았다.',600)
-    d.text(660,54,'MVC → WebFlux 평균 응답시간 비교',30,True)
-    d.text(660,96,'기록 기준 · 데이터 건수와 동시 사용자 조건 미기재',20,fill='#52627b')
-    d.text(177,204,'MVC',23,True,anchor='start')
-    d.box(177,229,860,62,fill='#e4e9f1',stroke='#c9d6e8',width=1.5)
-    d.parts.append('<rect x="177" y="229" width="860" height="62" rx="20" fill="#52627b"/>')
-    d.text(1067,269,'2,000 ms',25,True,anchor='start')
-    d.text(177,371,'WebFlux',23,True,anchor='start')
-    d.box(177,396,860,62,fill='#e4e9f1',stroke='#c9d6e8',width=1.5)
-    d.parts.append('<rect x="177" y="396" width="251" height="62" rx="20" fill="#2855bf"/>')
-    d.text(458,436,'584 ms',25,True,anchor='start')
-    d.box(424,510,472,58,fill='#f5f8fd',stroke='#acbff0',width=1.5)
-    d.text(660,548,'평균 응답시간 70.8% 감소',23,True,fill='#2855bf')
+    d=Diagram('MVC에서 Spring WebFlux로 프레임워크 전환',
+        '기존 MVC 동기 처리에서 외부 API 응답 대기 중 요청 스레드 점유에 따른 응답 지연을 파악하고 Spring WebFlux로 프레임워크를 교체. 평균 응답시간은 MVC 2000ms, WebFlux 584ms.',740)
+    d.box(40,45,570,325,'기존 · Spring MVC',fill='#f7f9fc',stroke='#c9d6e8',width=2)
+    d.icon('java',92,125,78)
+    d.icon('server',474,125,70,color=ARCH_BLUE)
+    d.text(130,248,'요청 스레드',25,True)
+    d.text(510,248,'외부 API',25,True)
+    d.arrow([(195,165),(450,165)],'동기 요청',(325,143))
+    d.box(90,281,470,58,fill='#fff',stroke='#c9d6e8',width=1.5)
+    d.text(325,320,'응답 대기 중 스레드 점유',26,True,fill=ARCH_BLUE)
+    d.arrow([(627,210),(692,210)])
+    d.box(710,45,570,325,'변경 · Spring WebFlux',fill='#f5f8ff',stroke='#b6c9f5',width=2)
+    d.icon('java',880,122,84)
+    d.icon('spring',1032,122,84)
+    d.text(995,253,'Java · Spring WebFlux',29,True)
+    d.text(995,320,'프레임워크 환경 교체',26,True,fill=ARCH_BLUE)
+    d.text(60,439,'평균 응답시간 (ms)',25,True,anchor='start')
+    for label,value,y,color in [('MVC',2000,492,'#64748b'),('WebFlux',584,624,'#2855bf')]:
+        d.text(60,y+42,label,28,True,anchor='start')
+        d.parts.append(f'<rect x="265" y="{y}" width="820" height="58" rx="10" fill="#f0f3f8"/>')
+        d.parts.append(f'<rect x="265" y="{y}" width="{820*value/2000}" height="58" rx="10" fill="{color}"/>')
+        d.text(1140,y+42,f'{value:,}',31,True,anchor='start',fill=color)
     return d.save('integration-response-comparison.svg')
 
 
@@ -282,8 +285,60 @@ def integration_tenant_policy():
     d.arrow([(608,373),(680,373),(680,295),(726,295)])
     d.arrow([(990,275),(1074,275)])
     d.text(660,485,'NSS · NBU 조회 분리 → 매핑 필터 합류 → 해당 테넌트 정책 목록',22,True)
-    d.text(660,548,'페이지 처리 · API 로그는 조회 흐름 점검의 보조 기록',20,fill='#52627b')
     return d.save('integration-tenant-policy.svg')
+
+
+
+def implementation_diagrams():
+    used=set()
+    groups=[
+        ('backup','Arabica 백엔드 구현',[
+            ('file-code','정책 · 스케줄',['전체·증분·차등 Bash 명령','커스텀 스케줄 생성·수정']),
+            ('database','로그 · 복원',['로그 검색·페이징','복원 흐름·결과 이력']),
+            ('shield-check','결과 판독 · 검증',['완료 후 결과 판독·검증','이력 보관 흐름 연결'])]),
+        ('wallet','모바일 디지털 지갑 백엔드 구현',[
+            ('wallet','회원 · 지갑 API',['회원·프로필·지갑·연락처','거래·스테이킹 인증']),
+            ('shield-check','인증 · 알림',['SSE·QR 로그인 · RSA 암호화','SMS·FCM 알림']),
+            ('file-code','DB · API 문서화',['DB 구조 문서화','API 문서화'])])]
+    for name,title,items in groups:
+        d=Diagram(title,' · '.join(title+': '+', '.join(lines) for _,title,lines in items),440)
+        for i,(icon,title,lines) in enumerate(items):
+            x=40+430*i
+            d.box(x,40,380,355,fill='#f7f9fc',stroke='#c9d6e8',width=1.6)
+            d.icon(icon,x+149,90,82,color=ARCH_BLUE)
+            d.text(x+190,227,title,29,True)
+            for j,line in enumerate(lines):d.text(x+190,291+j*41,line,23,fill='#2855bf')
+        used|=d.save(name+'-implementation.svg')
+    return used
+
+
+def integration_benchmark():
+    d=Diagram('동일 호스트 사양의 운영체제별 평균 응답시간',
+        '동일 호스트 사양, JVM 24GB, Postman 조건별 1분 시험. 30000건과 200000건, 가상 사용자 1·5·10명 조건의 Ubuntu 22.04.5와 RHEL 9.4 응답시간 비교. 패널별 눈금 범위가 다름.',760)
+    for x,color,label in [(60,'#2855bf','Ubuntu 22.04.5'),(370,'#64748b','RHEL 9.4')]:
+        d.parts.append(f'<rect x="{x}" y="32" width="28" height="20" rx="3" fill="{color}"/>')
+        d.text(x+40,52,label,24,True,anchor='start')
+    panels=[(40,30000,6000,[(1474,1179),(2678,2469),(5421,5247)]),
+            (680,200000,50000,[(7174,6617),(20036,24914),(47133,43814)])]
+    for x,count,maximum,rows in panels:
+        d.box(x,88,600,628,fill='#fff',stroke='#c9d6e8',width=1.6)
+        d.text(x+300,135,f'{count:,}건',30,True)
+        d.text(x+300,170,f'0–{maximum:,} ms',21,fill='#475467')
+        start=x+110
+        for n in range(4 if maximum==6000 else 6):
+            divisions=3 if maximum==6000 else 5
+            gx=start+n*335/divisions
+            d.parts.append(f'<path d="M {gx} 198 L {gx} 638" stroke="#e0e7f1" fill="none"/>')
+            d.text(gx,675,f'{maximum*n/divisions:,.0f}',18,fill='#475467')
+        for i,(ubuntu,rhel) in enumerate(rows):
+            y=222+i*145
+            d.text(x+60,y+45,f'VU { [1,5,10][i] }',22,True)
+            for k,(value,color) in enumerate([(ubuntu,'#2855bf'),(rhel,'#64748b')]):
+                yy=y+k*47
+                d.parts.append(f'<rect x="{start}" y="{yy}" width="{335*value/maximum}" height="32" rx="5" fill="{color}"/>')
+                d.text(x+570,yy+26,f'{value:,}',23,True,anchor='end',fill=color)
+    d.text(660,748,'평균 응답시간 · 패널별 눈금 범위 상이',20,fill='#475467')
+    return d.save('integration-benchmark.svg')
 
 
 if __name__ == '__main__':
@@ -291,5 +346,5 @@ if __name__ == '__main__':
     used |= overview('backup-overview.svg','Arabica · 원격 백업 관리','정책 · 실행 · 결과를 연결하는 백엔드',[('file-code','백업 정책','전체 · 증분 · 차등'),('linux','원격 실행','SSH · Bash'),('database','이력 · 복원','검증 · 검색 · 보관')])
     used |= overview('wallet-overview.svg','모바일 디지털 지갑','인증 · 데이터 보호 · 알림 기능 개발',[('user-round','회원 · 지갑','서비스 API'),('network','인증 · 보안','SSE · QR · RSA'),('cloud','알림','SMS · FCM')])
     used |= overview('integration-overview.svg','CMP · 외부 서비스 연동','인증 API 연동과 조건별 성능 비교',[('spring','WebFlux','구조 전환'),('network','인증 연동','WebClient 공통화'),('server','성능 시험','응답 · 메모리 · 오류')])
-    for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy,backup_async_flow,wallet_xss_flow]:used |= build()
-    print('Built 11 diagrams; icons:', ', '.join(sorted(used)))
+    for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy,backup_async_flow,wallet_xss_flow,implementation_diagrams,integration_benchmark]:used |= build()
+    print('Built 14 diagrams; icons:', ', '.join(sorted(used)))
