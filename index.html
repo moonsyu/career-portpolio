@@ -36,7 +36,7 @@
       <div class="container">
         <p class="eyebrow">Jang MoonSu / CAREER PROFILE</p>
         <h1 id="hero-title">Java 백엔드<br><span>경력기술서</span></h1>
-        <p class="hero-description">외부 서비스 연동 · 조건별 성능 시험<br>원격 백업 관리 · 모바일 디지털 지갑</p>
+        <p class="hero-description">원격 백업 관리 · AI 활용 개발<br>외부 서비스 연동 · 모바일 디지털 지갑</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#projects">업무 보기 <span aria-hidden="true">↓</span></a>
           <a class="button button-pdf" href="./output/pdf/Jang-MoonSu-Career.pdf?v=application-1" download="Jang-MoonSu-Career.pdf" aria-label="경력기술서 PDF 다운로드">PDF 다운로드 <span aria-hidden="true">↓</span></a>
@@ -68,7 +68,7 @@
                 <p>Java Backend Developer</p>
               </div>
             </div>
-            <p class="about-copy">외부 인증 연동 · 조건별 비교 시험<br>원격 백업 관리 · 모바일 서비스 백엔드</p>
+            <p class="about-copy">AI 활용 개발 · 원격 백업 관리<br>외부 인증 연동 · 모바일 서비스 백엔드</p>
           </div>
 
           <dl class="career-facts">
@@ -100,18 +100,83 @@
             <p class="label">02 / WORK</p>
             <h2 id="projects-title">업무</h2>
           </div>
-          <p>외부 연동 · 조건별 비교 시험<br>원격 실행 관리 · 모바일 서비스 백엔드</p>
+          <p>원격 백업 관리 · AI 활용 개발<br>외부 연동 · 모바일 서비스 백엔드</p>
         </div>
 
         <div class="project-index" aria-label="업무 바로가기">
-          <a href="#integration"><strong>01</strong><span>CMP · 외부 서비스 연동 · 성능 시험</span><small>INTEGRATION / VERIFICATION</small></a>
-          <a href="#backup"><strong>02</strong><span>Arabica · 원격 백업 관리</span><small>BACKEND / AUTOMATION</small></a>
+          <a href="#backup"><strong>01</strong><span>Arabica · 원격 백업 관리</span><small>BACKEND / AUTOMATION</small></a>
+          <a href="#integration"><strong>02</strong><span>CMP · 외부 서비스 연동 · 성능 시험</span><small>INTEGRATION / VERIFICATION</small></a>
           <a href="#wallet"><strong>03</strong><span>모바일 디지털 지갑</span><small>BACKEND / AUTHENTICATION</small></a>
         </div>
 
-        <article class="project" id="integration" aria-labelledby="integration-title">
+        <article class="project" id="backup" aria-labelledby="backup-title">
           <div class="project-heading">
             <span class="project-no">01</span>
+            <h3 id="backup-title">Arabica · 원격 백업 관리</h3>
+            <span class="project-category">BACKEND / AUTOMATION</span>
+          </div>
+          <div class="project-overview">
+            <figure class="project-visual work-visual">
+              <button class="image-button" type="button" data-enlarge data-diagram aria-label="원격 백업 관리 담당 기능 요약 확대">
+                <img src="./assets/architecture/backup-overview.svg" width="840" height="520" alt="원격 백업 관리의 담당 기능 요약 도식" loading="lazy">
+              </button>
+            </figure>
+            <div class="project-tech">
+              <p class="techline"><span>TECH</span> Java 17 · Spring Boot 3.2.5 · SSH · Linux · Bash</p>
+              <ul class="skill-icons" aria-label="사용 기술">
+                <li><img src="./assets/architecture/icons/java.svg" alt="">Java</li>
+                <li><img src="./assets/architecture/icons/spring.svg" alt="">Spring Boot</li>
+                <li><img src="./assets/architecture/icons/linux.svg" alt="">Linux</li>
+                <li><img src="./assets/architecture/icons/network.svg" alt="">SSH</li>
+                <li><img src="./assets/architecture/icons/file-code.svg" alt="">Bash</li>
+              </ul>
+            </div>
+          </div>
+          <details class="detail" open>
+            <summary>아키텍처 · 구현 · 트러블슈팅 · 개선 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING · IMPROVEMENT</small></summary>
+            <div class="detail-body">
+              <section aria-labelledby="backup-architecture-title">
+                <p class="label">APPLICATION ARCHITECTURE</p>
+                <h4 class="detail-title" id="backup-architecture-title">API·비동기 실행·저장소로 구성한 백업 애플리케이션</h4>
+                <figure class="application-architecture">
+                  <div class="application-map" tabindex="0" role="region" aria-label="원격 백업 관리 애플리케이션 아키텍처. 가로 스크롤 가능">
+                    <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="원격 백업 관리 애플리케이션 아키텍처 확대">
+                      <img src="./assets/architecture/backup-application.svg?v=reference-1" width="1320" height="900" alt="Arabica 애플리케이션 아키텍처: React와 Spring Boot 계층, 비동기 백업 실행, MariaDB·Redis 및 SSH 원격 서버의 연결" loading="lazy">
+                    </button>
+                  </div>
+                </figure>
+              </section>
+              <section aria-labelledby="backup-implementation-title">
+                <p class="label">IMPLEMENTATION</p>
+                <h4 class="detail-title" id="backup-implementation-title">정책·스케줄과 이력 조회를 위한 백엔드 구현</h4><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 정책·스케줄, 로그·복원, 결과 판독·검증 구현 확대"><img src="./assets/architecture/backup-implementation.svg?v=submission-1" width="1320" height="440" alt="백업 정책·스케줄, 로그·복원, 결과 판독·검증 구현" loading="lazy"></button></figure></section>
+              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="backup-ai-title">
+                <p class="label">TROUBLESHOOTING</p>
+                <h4 class="detail-title" id="backup-ai-title">AI를 활용한 기술 검증과 개발 오류 해결</h4>
+                <div class="troubleshooting-grid">
+                  <figure class="evidence-figure">
+                    <button class="image-button" type="button" data-enlarge data-diagram aria-label="AI 후보 탐색·직접 기술 검증과 Gemini를 활용한 개발 오류 해결 흐름 확대">
+                      <img src="./assets/architecture/backup-ai-development.svg?v=ai-1" width="1320" height="860" alt="AI로 SSH 라이브러리 후보 탐색, 취약점·버전 이력·업데이트 지속 여부 직접 검증과 선택. AI 제안 코드 오류를 로그·공식 문서로 분석하고 최신 문서를 Gemini에 제공해 수정 방향을 검토한 뒤 코드에 반영" loading="lazy">
+                    </button>
+                  </figure>
+                  <dl class="case-facts troubleshooting-facts">
+                    <div><dt>문제</dt><dd><ul><li>AI 제안 코드에서 라이브러리 버전 차이에 따른 메서드 오류 발생</li></ul></dd></div>
+                    <div><dt>조치</dt><dd><ul><li>로그·공식 문서로 메서드 변경 확인</li><li>최신 문서를 Gemini에 제공해 수정 방향 검토 후 코드 반영</li></ul></dd></div>
+                  </dl>
+                </div>
+              </section>
+              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="backup-async-title">
+                <p class="label">TROUBLESHOOTING</p>
+                <h4 class="detail-title" id="backup-async-title">장시간 백업 작업과 요청 처리 분리</h4>
+                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="요청 처리와 비동기 백업 실행 및 이력 기록 확대"><img src="./assets/architecture/backup-async-flow.svg?v=submission-1" width="1320" height="440" alt="요청 처리와 비동기 백업 실행 및 이력 기록" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>장시간 백업 명령·파일 전송과 요청 처리 분리 필요</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>백업 작업 비동기 분리 · 정책별 명령 구성과 SSH 실행</li><li>완료 후 결과 판독·검증·이력 기록</li></ul></dd></div></dl></div>
+              </section>
+              <section class="detail-page" data-page-kind="improvement" aria-labelledby="backup-restore-title"><p class="label">IMPROVEMENT</p><h4 class="detail-title" id="backup-restore-title">백업 파일 생성 확인에서 복원 데이터 확인까지 점검 범위 확대</h4><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 점검 범위 확대와 MySQL·Docker 전체·증분 복원 실험 확대"><img src="./assets/architecture/backup-restore-verification.svg?v=submission-1" width="1320" height="600" alt="백업 점검 범위 확대와 MySQL·Docker 전체·증분 복원 실험" loading="lazy"></button></figure></section>
+            </div>
+          </details>
+        </article>
+
+        <article class="project" id="integration" aria-labelledby="integration-title">
+          <div class="project-heading">
+            <span class="project-no">02</span>
             <h3 id="integration-title">CMP · 외부 서비스 연동 · 성능 시험</h3>
             <span class="project-category">INTEGRATION / VERIFICATION</span>
           </div>
@@ -155,56 +220,6 @@
                 <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="NSS·NBU 조회 분리와 테넌트 매핑을 통한 정책 조회 확대"><img src="./assets/architecture/integration-tenant-policy.svg?v=submission-1" width="1320" height="600" alt="NSS·NBU 조회 분리와 테넌트 매핑을 통한 정책 조회" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>Kubernetes 백업 정책이 모든 테넌트에 표시</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>NSS·NBU 조회 경로 분리 및 페이지·API 로그 점검</li><li>테넌트·클러스터·namespace 매핑 필터 적용</li></ul></dd></div></dl></div>
               </section>
               <section class="detail-page" data-page-kind="benchmark" aria-labelledby="integration-benchmark-title"><p class="label">BENCHMARK</p><h4 class="detail-title" id="integration-benchmark-title">Ubuntu 22.04.5와 RHEL 9.4 조건별 응답시간 비교</h4><div class="benchmark-context"><ul><li>동일 호스트 사양 · JVM 24GB · Postman 조건별 각 1분</li><li>3만·20만 건 · 동시 가상 사용자(VU) 1·5·10명</li></ul></div><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="동일 호스트 사양의 Ubuntu와 RHEL 평균 응답시간 비교 확대"><img src="./assets/architecture/integration-benchmark.svg?v=submission-1" width="1320" height="760" alt="동일 호스트 사양의 Ubuntu와 RHEL 평균 응답시간 비교" loading="lazy"></button></figure><div class="visually-hidden"><table class="benchmark-table"><caption>평균 응답시간 비교 (ms)</caption><thead><tr><th scope="col">건수</th><th scope="col">VU</th><th scope="col">Ubuntu 22.04.5</th><th scope="col">RHEL 9.4</th></tr></thead><tbody><tr><td>30,000</td><td>1</td><td>1,474</td><td>1,179</td></tr><tr><td>30,000</td><td>5</td><td>2,678</td><td>2,469</td></tr><tr><td>30,000</td><td>10</td><td>5,421</td><td>5,247</td></tr><tr><td>200,000</td><td>1</td><td>7,174</td><td>6,617</td></tr><tr><td>200,000</td><td>5</td><td>20,036</td><td>24,914</td></tr><tr><td>200,000</td><td>10</td><td>47,133</td><td>43,814</td></tr></tbody></table></div></section>
-            </div>
-          </details>
-        </article>
-
-        <article class="project" id="backup" aria-labelledby="backup-title">
-          <div class="project-heading">
-            <span class="project-no">02</span>
-            <h3 id="backup-title">Arabica · 원격 백업 관리</h3>
-            <span class="project-category">BACKEND / AUTOMATION</span>
-          </div>
-          <div class="project-overview">
-            <figure class="project-visual work-visual">
-              <button class="image-button" type="button" data-enlarge data-diagram aria-label="원격 백업 관리 담당 기능 요약 확대">
-                <img src="./assets/architecture/backup-overview.svg" width="840" height="520" alt="원격 백업 관리의 담당 기능 요약 도식" loading="lazy">
-              </button>
-            </figure>
-            <div class="project-tech">
-              <p class="techline"><span>TECH</span> Java 17 · Spring Boot 3.2.5 · SSH · Linux · Bash</p>
-              <ul class="skill-icons" aria-label="사용 기술">
-                <li><img src="./assets/architecture/icons/java.svg" alt="">Java</li>
-                <li><img src="./assets/architecture/icons/spring.svg" alt="">Spring Boot</li>
-                <li><img src="./assets/architecture/icons/linux.svg" alt="">Linux</li>
-                <li><img src="./assets/architecture/icons/network.svg" alt="">SSH</li>
-                <li><img src="./assets/architecture/icons/file-code.svg" alt="">Bash</li>
-              </ul>
-            </div>
-          </div>
-          <details class="detail" open>
-            <summary>아키텍처 · 구현 · 트러블슈팅 · 개선 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING · IMPROVEMENT</small></summary>
-            <div class="detail-body">
-              <section aria-labelledby="backup-architecture-title">
-                <p class="label">APPLICATION ARCHITECTURE</p>
-                <h4 class="detail-title" id="backup-architecture-title">API·비동기 실행·저장소로 구성한 백업 애플리케이션</h4>
-                <figure class="application-architecture">
-                  <div class="application-map" tabindex="0" role="region" aria-label="원격 백업 관리 애플리케이션 아키텍처. 가로 스크롤 가능">
-                    <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="원격 백업 관리 애플리케이션 아키텍처 확대">
-                      <img src="./assets/architecture/backup-application.svg?v=reference-1" width="1320" height="900" alt="Arabica 애플리케이션 아키텍처: React와 Spring Boot 계층, 비동기 백업 실행, MariaDB·Redis 및 SSH 원격 서버의 연결" loading="lazy">
-                    </button>
-                  </div>
-                </figure>
-              </section>
-              <section aria-labelledby="backup-implementation-title">
-                <p class="label">IMPLEMENTATION</p>
-                <h4 class="detail-title" id="backup-implementation-title">정책·스케줄과 이력 조회를 위한 백엔드 구현</h4><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 정책·스케줄, 로그·복원, 결과 판독·검증 구현 확대"><img src="./assets/architecture/backup-implementation.svg?v=submission-1" width="1320" height="440" alt="백업 정책·스케줄, 로그·복원, 결과 판독·검증 구현" loading="lazy"></button></figure></section>
-              <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="backup-async-title">
-                <p class="label">TROUBLESHOOTING</p>
-                <h4 class="detail-title" id="backup-async-title">장시간 백업 작업과 요청 처리 분리</h4>
-                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="요청 처리와 비동기 백업 실행 및 이력 기록 확대"><img src="./assets/architecture/backup-async-flow.svg?v=submission-1" width="1320" height="440" alt="요청 처리와 비동기 백업 실행 및 이력 기록" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>장시간 백업 명령·파일 전송과 요청 처리 분리 필요</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>백업 작업 비동기 분리 · 정책별 명령 구성과 SSH 실행</li><li>완료 후 결과 판독·검증·이력 기록</li></ul></dd></div></dl></div>
-              </section>
-              <section class="detail-page" data-page-kind="improvement" aria-labelledby="backup-restore-title"><p class="label">IMPROVEMENT</p><h4 class="detail-title" id="backup-restore-title">백업 파일 생성 확인에서 복원 데이터 확인까지 점검 범위 확대</h4><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="백업 점검 범위 확대와 MySQL·Docker 전체·증분 복원 실험 확대"><img src="./assets/architecture/backup-restore-verification.svg?v=submission-1" width="1320" height="600" alt="백업 점검 범위 확대와 MySQL·Docker 전체·증분 복원 실험" loading="lazy"></button></figure></section>
             </div>
           </details>
         </article>

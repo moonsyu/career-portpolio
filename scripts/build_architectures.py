@@ -341,10 +341,35 @@ def integration_benchmark():
     return d.save('integration-benchmark.svg')
 
 
+
+def backup_ai_development():
+    d=Diagram('AI를 활용한 기술 검증과 개발 오류 해결',
+        'AI로 SSH 라이브러리 후보를 탐색한 뒤 취약점·버전 이력·업데이트 지속 여부를 직접 검증해 선택. AI 제안 코드의 오류는 로그·공식 문서로 메서드 변경을 확인하고 최신 문서를 Gemini에 전달해 수정 방향을 검토한 후 직접 반영.',860)
+    rows=[
+        (60,'라이브러리 검증',[
+            ('workflow','AI 후보 탐색',['SSH 라이브러리','후보 탐색']),
+            ('shield-check','직접 검증',['취약점 · 버전 이력','업데이트 지속 여부']),
+            ('user-round','기술 선택',['안전성 · 유지보수성 비교','라이브러리 선택'])]),
+        (467,'개발 오류 해결',[
+            ('file-code','오류 발생',['AI 제안 코드','실행 오류 확인']),
+            ('book-open','원인 확인',['로그 · 공식 문서 대조','버전 변경에 따른 메서드 변경']),
+            ('workflow','수정 · 반영',['Gemini에 최신 문서 제공','수정 방향 검토 · 직접 적용'])])]
+    for y,title,items in rows:
+        d.text(40,y,title,30,True,anchor='start',fill=ARCH_BLUE)
+        for i,(icon,label,lines) in enumerate(items):
+            x=40+i*440;top=y+32
+            d.box(x,top,360,315,fill='#f7f9fc',stroke='#c9d6e8',width=1.6)
+            d.icon(icon,x+142,top+38,76,color=ARCH_BLUE)
+            d.text(x+180,top+166,label,29,True)
+            for j,line in enumerate(lines):d.text(x+180,top+222+j*40,line,23,fill='#2855bf')
+            if i<2:d.arrow([(x+368,top+153),(x+432,top+153)])
+    return d.save('backup-ai-development.svg')
+
+
 if __name__ == '__main__':
     used=set()
     used |= overview('backup-overview.svg','Arabica · 원격 백업 관리','정책 · 실행 · 결과를 연결하는 백엔드',[('file-code','백업 정책','전체 · 증분 · 차등'),('linux','원격 실행','SSH · Bash'),('database','이력 · 복원','검증 · 검색 · 보관')])
     used |= overview('wallet-overview.svg','모바일 디지털 지갑','인증 · 데이터 보호 · 알림 기능 개발',[('user-round','회원 · 지갑','서비스 API'),('network','인증 · 보안','SSE · QR · RSA'),('cloud','알림','SMS · FCM')])
     used |= overview('integration-overview.svg','CMP · 외부 서비스 연동','인증 API 연동과 조건별 성능 비교',[('spring','WebFlux','구조 전환'),('network','인증 연동','WebClient 공통화'),('server','성능 시험','응답 · 메모리 · 오류')])
-    for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy,backup_async_flow,wallet_xss_flow,implementation_diagrams,integration_benchmark]:used |= build()
-    print('Built 14 diagrams; icons:', ', '.join(sorted(used)))
+    for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy,backup_async_flow,wallet_xss_flow,implementation_diagrams,integration_benchmark,backup_ai_development]:used |= build()
+    print('Built 15 diagrams; icons:', ', '.join(sorted(used)))
