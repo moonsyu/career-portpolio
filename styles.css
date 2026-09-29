@@ -166,3 +166,12 @@ strong,b{font-weight:750;color:var(--ink)}
 .benchmark-table th:first-child,.benchmark-table td:first-child{text-align:left}
 .benchmark-table-wrap:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 @media(max-width:760px){.career-facts>div{grid-template-columns:1fr;gap:6px}.career-facts dd{font-size:18px}.work-detail-list,.flow-comparison{grid-template-columns:1fr}.work-detail-list>div{padding:19px}.work-detail-list ul,.work-outcomes span,.flow-comparison p{font-size:17px}.work-outcomes li{padding:19px}.work-visual .image-button{padding:12px}.career-facts dt{font-size:16px}}
+
+/* Project overview: illustration followed by the technology stack. */
+.project-overview{display:flex;flex-direction:column;align-items:flex-start;gap:22px;max-width:840px}
+.project-overview .work-visual{width:min(620px,100%);margin:0}
+.project-tech{width:100%;min-width:0}
+.project-tech .techline{margin:0 0 18px;padding-top:20px;line-height:1.8}
+.project-tech .skill-icons{margin:0}
+.application-architecture{background:#fff}
+@media(max-width:760px){.project-overview{gap:18px}.project-overview .work-visual{width:100%}.project-tech .techline{padding-top:16px}}

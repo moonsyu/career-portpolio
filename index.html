@@ -11,7 +11,7 @@
   <meta property="og:description" content="Java 백엔드 업무 기록">
   <meta property="og:url" content="https://moonsyu.github.io/career-portpolio/">
   <title>장문수 | 경력기술서</title>
-  <link rel="stylesheet" href="./styles.css?v=career-2">
+  <link rel="stylesheet" href="./styles.css?v=reference-1">
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -116,14 +116,12 @@
             <span class="project-category">INTEGRATION / VERIFICATION</span>
           </div>
           <div class="project-overview">
-            <div class="project-description">
-              <p class="project-meta">외부 API 연동 · 조건별 비교 시험</p>
-              <h4>외부 인증 API 연동과 데이터·동시 사용자 조건별 비교 업무</h4>
-              <ul>
-                <li>WebClient 공통 유틸 기반 외부 인증 API 연동과 세션·HttpOnly Cookie 토큰 관리</li>
-                <li>테넌트별 Kubernetes 조회 범위 조정과 페이지 처리·API 로그 확인</li>
-                <li>조건별 응답시간·P95·JVM 메모리·오류 비교와 시험 문서 작성</li>
-              </ul>
+            <figure class="project-visual work-visual">
+              <button class="image-button" type="button" data-enlarge data-diagram aria-label="외부 서비스 연동과 성능 시험 담당 기능 요약 확대">
+                <img src="./assets/architecture/integration-overview.svg" width="840" height="520" alt="외부 서비스 연동과 성능 시험의 담당 기능 요약 도식" loading="lazy">
+              </button>
+            </figure>
+            <div class="project-tech">
               <p class="techline"><span>TECH</span> Java · Spring WebFlux · WebClient · Mono · NetBackup API</p>
               <ul class="skill-icons" aria-label="사용 기술">
                 <li><img src="./assets/architecture/icons/java.svg" alt="">Java</li>
@@ -131,12 +129,6 @@
                 <li><img src="./assets/architecture/icons/network.svg" alt="">WebClient · Mono</li>
               </ul>
             </div>
-            <figure class="project-visual work-visual">
-              <button class="image-button" type="button" data-enlarge data-diagram aria-label="외부 서비스 연동과 성능 시험 담당 기능 요약 확대">
-                <img src="./assets/architecture/integration-overview.svg" width="840" height="520" alt="외부 서비스 연동과 성능 시험의 담당 기능 요약 도식" loading="lazy">
-              </button>
-              <figcaption><span>담당 기능 요약</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-            </figure>
           </div>
           <details class="detail" open>
             <summary>아키텍처 · 구현 · 트러블슈팅 · 성능 시험 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING · BENCHMARK</small></summary>
@@ -147,11 +139,9 @@
                 <figure class="application-architecture">
                   <div class="application-map" tabindex="0" role="region" aria-label="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처. 가로 스크롤 가능">
                     <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="외부 서비스 연동과 성능 시험 애플리케이션 아키텍처 확대">
-                      <img src="./assets/architecture/integration-application.svg?v=application-1" width="1320" height="800" alt="CMP 애플리케이션 아키텍처: React 클라이언트, API와 조회 서비스, NSS·NBU 연동 모듈 및 외부 API의 연결" loading="lazy">
+                      <img src="./assets/architecture/integration-application.svg?v=reference-1" width="1320" height="900" alt="CMP 애플리케이션 아키텍처: React 클라이언트, API와 조회 서비스, NSS·NBU 연동 모듈 및 외부 API의 연결" loading="lazy">
                     </button>
                   </div>
-                  <figcaption><span>CMP v2.0 · React · Spring WebFlux · NSS·NBU API</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-                  <p class="diagram-scroll-hint">← 도식이 넓습니다. 좌우로 스크롤하거나 클릭해 확대해 보세요. →</p>
                 </figure>
               </section>
               <section aria-labelledby="integration-implementation-title">
@@ -188,14 +178,12 @@
             <span class="project-category">BACKEND / AUTOMATION</span>
           </div>
           <div class="project-overview">
-            <div class="project-description">
-              <p class="project-meta">2인 팀 · 백엔드 장문수</p>
-              <h4>백업 정책, 실행 이력과 복원 흐름을 관리하는 백엔드 업무</h4>
-              <ul>
-                <li>SSH·Bash 기반 전체·증분·차등 백업 정책과 커스텀 스케줄 관리</li>
-                <li>정책별 명령 구성과 원격 실행, 로그 검색·페이징</li>
-                <li>결과 판독·검증·이력 보관과 복원 흐름</li>
-              </ul>
+            <figure class="project-visual work-visual">
+              <button class="image-button" type="button" data-enlarge data-diagram aria-label="원격 백업 관리 담당 기능 요약 확대">
+                <img src="./assets/architecture/backup-overview.svg" width="840" height="520" alt="원격 백업 관리의 담당 기능 요약 도식" loading="lazy">
+              </button>
+            </figure>
+            <div class="project-tech">
               <p class="techline"><span>TECH</span> Java 17 · Spring Boot 3.2.5 · SSH · Linux · Bash</p>
               <ul class="skill-icons" aria-label="사용 기술">
                 <li><img src="./assets/architecture/icons/java.svg" alt="">Java</li>
@@ -205,12 +193,6 @@
                 <li><img src="./assets/architecture/icons/file-code.svg" alt="">Bash</li>
               </ul>
             </div>
-            <figure class="project-visual work-visual">
-              <button class="image-button" type="button" data-enlarge data-diagram aria-label="원격 백업 관리 담당 기능 요약 확대">
-                <img src="./assets/architecture/backup-overview.svg" width="840" height="520" alt="원격 백업 관리의 담당 기능 요약 도식" loading="lazy">
-              </button>
-              <figcaption><span>담당 기능 요약</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-            </figure>
           </div>
           <details class="detail" open>
             <summary>아키텍처 · 구현 · 트러블슈팅 · 개선 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING · IMPROVEMENT</small></summary>
@@ -221,11 +203,9 @@
                 <figure class="application-architecture">
                   <div class="application-map" tabindex="0" role="region" aria-label="원격 백업 관리 애플리케이션 아키텍처. 가로 스크롤 가능">
                     <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="원격 백업 관리 애플리케이션 아키텍처 확대">
-                      <img src="./assets/architecture/backup-application.svg?v=application-1" width="1320" height="900" alt="Arabica 애플리케이션 아키텍처: React와 Spring Boot 계층, 비동기 백업 실행, MariaDB·Redis 및 SSH 원격 서버의 연결" loading="lazy">
+                      <img src="./assets/architecture/backup-application.svg?v=reference-1" width="1320" height="900" alt="Arabica 애플리케이션 아키텍처: React와 Spring Boot 계층, 비동기 백업 실행, MariaDB·Redis 및 SSH 원격 서버의 연결" loading="lazy">
                     </button>
                   </div>
-                  <figcaption><span>Spring Boot 백엔드 · 저장소 · SSH 원격 실행</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-                  <p class="diagram-scroll-hint">← 도식이 넓습니다. 좌우로 스크롤하거나 클릭해 확대해 보세요. →</p>
                 </figure>
               </section>
               <section aria-labelledby="backup-implementation-title">
@@ -272,14 +252,12 @@
             <span class="project-category">BACKEND / AUTHENTICATION</span>
           </div>
           <div class="project-overview">
-            <div class="project-description">
-              <p class="project-meta">Java 백엔드</p>
-              <h4>회원, 지갑, 인증과 알림 기능을 연결한 모바일 서비스 백엔드 업무</h4>
-              <ul>
-                <li>회원·프로필·지갑·연락처 API 구현</li>
-                <li>SSE·QR 로그인과 RSA 기반 통신 암호화 적용</li>
-                <li>거래·스테이킹 인증, SMS·FCM 알림과 DB·API 문서화</li>
-              </ul>
+            <figure class="project-visual work-visual">
+              <button class="image-button" type="button" data-enlarge data-diagram aria-label="모바일 디지털 지갑 담당 기능 요약 확대">
+                <img src="./assets/architecture/wallet-overview.svg" width="840" height="520" alt="모바일 디지털 지갑의 담당 기능 요약 도식" loading="lazy">
+              </button>
+            </figure>
+            <div class="project-tech">
               <p class="techline"><span>TECH</span> Java · Spring Boot · PostgreSQL · SSE · RSA</p>
               <ul class="skill-icons" aria-label="사용 기술">
                 <li><img src="./assets/architecture/icons/java.svg" alt="">Java</li>
@@ -288,12 +266,6 @@
                 <li><img src="./assets/architecture/icons/network.svg" alt="">SSE · RSA</li>
               </ul>
             </div>
-            <figure class="project-visual work-visual">
-              <button class="image-button" type="button" data-enlarge data-diagram aria-label="모바일 디지털 지갑 담당 기능 요약 확대">
-                <img src="./assets/architecture/wallet-overview.svg" width="840" height="520" alt="모바일 디지털 지갑의 담당 기능 요약 도식" loading="lazy">
-              </button>
-              <figcaption><span>담당 기능 요약</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-            </figure>
           </div>
           <details class="detail" open>
             <summary>아키텍처 · 구현 · 트러블슈팅 <small>APPLICATION ARCHITECTURE · IMPLEMENTATION · TROUBLESHOOTING</small></summary>
@@ -304,12 +276,9 @@
                 <figure class="application-architecture">
                   <div class="application-map" tabindex="0" role="region" aria-label="모바일 디지털 지갑 애플리케이션 아키텍처. 가로 스크롤 가능">
                     <button class="image-button diagram-button" type="button" data-enlarge data-diagram aria-label="모바일 디지털 지갑 애플리케이션 아키텍처 확대">
-                      <img src="./assets/architecture/wallet-application.svg?v=application-1" width="1320" height="920" alt="디지털 지갑 애플리케이션 아키텍처: 보안 필터, Dispatcher와 업무 메서드, MyBatis·PostgreSQL, 외부 알림 연동" loading="lazy">
+                      <img src="./assets/architecture/wallet-application.svg?v=reference-1" width="1320" height="960" alt="디지털 지갑 애플리케이션 아키텍처: 보안 필터, Dispatcher와 업무 메서드, MyBatis·PostgreSQL, 외부 알림 연동" loading="lazy">
                     </button>
                   </div>
-                  <figcaption><span>프로젝트 애플리케이션 구조 · Dispatcher·MyBatis·외부 연동</span><span>클릭하여 크게 보기 ↗</span></figcaption>
-                  <p class="diagram-scroll-hint">개인 담당: 회원·지갑 API, 인증·암호화·알림 개선, 오류 수정 및 문서화</p>
-                  <p class="diagram-scroll-hint">← 도식이 넓습니다. 좌우로 스크롤하거나 클릭해 확대해 보세요. →</p>
                 </figure>
               </section>
               <section aria-labelledby="wallet-implementation-title">

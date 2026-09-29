@@ -100,37 +100,49 @@ def datastore(d, x, y, title, icon, detail):
     d.text(x+125,y+115,detail,20,True,fill='#475467')
 
 
+
+def web_service(d, x, y, w, h, framework, lines):
+    d.box(x,y,w,h,'Web Service',fill='#f7f9fc',stroke='#c9d6e8',width=1.6)
+    center=x+w/2
+    d.icon('java',center-110,y+75,72)
+    d.icon('spring',center+32,y+75,72)
+    d.text(center,y+186,framework,23,True)
+    for i,line in enumerate(lines):
+        d.text(center,y+226+i*31,line,20,fill='#2855bf')
+
+
+def external_service(d, x, y, w, title, icon, name, lines, h=220):
+    d.box(x,y,w,h,title,width=2.6)
+    d.node(icon,x+w/2,y+65,name,lines,size=62,color='#2855bf')
+
+
 def backup():
     d=Diagram('Arabica · 애플리케이션 아키텍처',
-        'React 클라이언트와 Spring Security·REST Controller·업무 서비스, JPA·MariaDB, 인증 서비스·Redis, 앱 내부 스케줄러·비동기 작업과 SSH 원격 백업 실행의 연결.',900)
-    d.text(660,48,'Arabica · 애플리케이션 아키텍처',30,True,fill=ARCH_BLUE)
-    d.box(260,110,725,660,fill='#fff',stroke=ARCH_BLUE,width=2.5)
-    d.text(290,154,'Arabica · Spring Boot 백엔드',27,True,anchor='start',fill=ARCH_BLUE)
-    d.icon('java',846,128,43); d.icon('spring',912,128,43)
-    component(d,20,228,195,'React · TS','react',['웹 클라이언트','정책 · 일정 · 조회'],h=138)
-    component(d,288,228,204,'보안 필터','shield-check',['Spring Security','JWT 인증'])
-    component(d,528,228,204,'Controller','network',['REST API'])
-    component(d,768,228,194,'업무 서비스','workflow',['정책 · 스케줄','로그 · 복원'])
-    component(d,288,468,204,'인증 서비스','user-round',['로그인 토큰 관리'])
-    component(d,528,468,204,'데이터 접근','database',['JPA Repository'])
-    component(d,768,448,194,'스케줄러','calendar-clock',['예약 작업 호출'])
-    component(d,768,638,194,'비동기 작업','terminal',['정책별 명령 생성','SSH 클라이언트'])
-    datastore(d,1040,132,'Redis','redis','로그인 토큰')
-    datastore(d,1040,346,'MariaDB','mariadb','정책 · 실행 이력')
-    component(d,1040,628,250,'Linux 서버','linux',['Bash 백업 · 복원'])
-    component(d,1040,784,250,'백업 저장소','folder-open',[],h=64)
-    d.arrow([(215,284),(288,284)],'HTTP/JSON',(250,209),both=True)
-    d.arrow([(492,284),(528,284)]); d.arrow([(732,284),(768,284)])
-    d.arrow([(528,307),(512,307),(512,425),(390,425),(390,468)],'인증 요청',(397,416))
-    d.arrow([(865,340),(865,394),(630,394),(630,468)],'데이터 처리',(742,384),both=True)
-    d.arrow([(288,525),(242,525),(242,191),(1040,191)],'토큰 저장 · 조회',(647,183),both=True)
-    d.arrow([(732,540),(749,540),(749,593),(1019,593),(1019,414),(1040,414)],'JPA / SQL',(888,583),both=True)
-    d.arrow([(768,710),(600,710),(600,580)],'이력 조회·기록',(666,699),both=True)
-    d.arrow([(865,560),(865,638)],'예약 실행',(865,621),dashed=True)
-    d.arrow([(962,694),(1040,694)],'SSH',(1002,673),both=True)
-    d.arrow([(1165,740),(1165,784)],'백업 파일',(1224,768))
-    d.text(660,885,'실선: 호출·데이터 전달  ·  점선: 예약 실행  ·  프런트엔드: 팀원 / 백엔드: 본인 담당',20,True,fill='#475467')
+        'React·TypeScript 클라이언트와 Spring Boot 웹 서비스, Redis 로그인 토큰 및 JPA·MariaDB 정책·이력 저장소. 애플리케이션 내부 Scheduler가 비동기 Backup Worker를 호출하고 SSH로 원격 Linux에서 정책별 Bash 백업·복원을 실행하는 구조.',900)
+    d.box(325,65,975,470,'Application Services · Arabica',width=2.8)
+    d.box(20,180,220,300,'Clients',width=2.8)
+    d.node('react',130,255,'React · TypeScript','Web Browser',size=80,color=ARCH_BLUE)
+    web_service(d,370,145,320,335,'Java · Spring Boot',
+        ['Security · JWT 인증','정책 · 스케줄 · 이력 API','JPA Repository'])
+    d.node('calendar-clock',835,215,'Scheduler',['예약 작업 호출'],size=74,color=ARCH_BLUE)
+    d.node('terminal',1140,215,'Backup Worker',['비동기 실행 · 정책별 명령','Bash · SSH Client'],size=74,color=ARCH_BLUE)
+    external_service(d,335,650,270,'Token Store','redis','Redis',['로그인 토큰'])
+    external_service(d,645,650,280,'Database','mariadb','MariaDB',['정책 · 실행 이력'])
+    d.box(970,650,330,220,'Remote Backup',width=2.6)
+    d.icon('linux',1005,712,68)
+    d.icon('folder-open',1203,712,62,color=ARCH_BLUE)
+    d.text(1040,814,'Linux',22,True)
+    d.text(1230,814,'백업 파일',22,True)
+    d.text(1135,850,'Bash 백업 · 복원',19,fill='#475467')
+    d.arrow([(1085,748),(1190,748)])
+    d.arrow([(240,290),(370,290)],'HTTP / JSON',(305,268),both=True)
+    d.arrow([(885,252),(1090,252)],'예약 실행',(987,231))
+    d.arrow([(470,480),(470,650)],'토큰 저장·조회',(470,568),both=True)
+    d.arrow([(630,480),(630,575),(730,575),(730,650)],'JPA / SQL',(680,562),both=True)
+    d.arrow([(1090,403),(1090,599),(850,599),(850,650)],'이력 조회·기록',(930,586),both=True)
+    d.arrow([(1170,403),(1170,548),(1240,548),(1240,650)],'SSH',(1240,607),both=True)
     return d.save('backup-application.svg')
+
 
 
 def backup_async_flow():
@@ -167,60 +179,47 @@ def wallet_xss_flow():
 
 def wallet():
     d=Diagram('모바일 디지털 지갑 · 애플리케이션 아키텍처',
-        '앱·대시보드·내부 연동 서버 요청이 보안 필터, JSON method 기반 Dispatcher, 업무 Bean, MyBatis·PostgreSQL로 이어지고 알림 모듈이 외부 SMS·FCM과 사용자 앱을 연결하는 프로젝트 구조.',920)
-    d.text(660,48,'모바일 디지털 지갑 · 애플리케이션 아키텍처',30,True,fill=ARCH_BLUE)
-    d.box(255,110,740,656,fill='#fff',stroke=ARCH_BLUE,width=2.5)
-    d.text(285,154,'Wallet · Spring Boot 애플리케이션',27,True,anchor='start',fill=ARCH_BLUE)
-    d.icon('java',850,127,43); d.icon('spring',917,127,43)
-    for y,icon,title in [(190,'smartphone','사용자 앱'),(370,'globe','Dashboard'),(550,'server','내부 서버')]:
-        component(d,24,y,176,title,icon,[],h=90)
-    component(d,285,235,206,'보안 필터','shield-check',['Spring Security','복호화 · 입력 검증'])
-    component(d,525,235,206,'Dispatcher','workflow',['JSON method 값으로','업무 Bean 선택'])
-    component(d,765,235,206,'업무 Bean','wallet',['회원 · 지갑','인증 · 알림'])
-    component(d,765,448,206,'데이터 접근','database',['MyBatis DAO','Mapper'])
-    component(d,525,630,206,'알림 모듈','bell-ring',['SMS · FCM 발송'])
-    component(d,285,630,206,'JPA Entity','package',['초기 스키마 관리'])
-    datastore(d,1035,265,'PostgreSQL','postgresql','서비스 데이터')
-    component(d,1050,630,250,'SMS · FCM','firebase',['외부 발송 서비스'])
-    for y in [235,415,595]:
-        d.arrow([(200,y),(235,y),(235,291),(285,291)])
-    d.text(222,199,'HTTP',18,True,fill='#475467')
-    d.arrow([(491,291),(525,291)]); d.arrow([(731,291),(765,291)])
-    d.arrow([(868,347),(868,448)],'데이터 처리',(868,405),both=True)
-    d.arrow([(971,502),(1027,502),(1027,333),(1035,333)],'SQL',(1007,430),both=True)
-    d.arrow([(765,313),(749,313),(749,684),(731,684)],'알림 요청',(746,598))
-    d.arrow([(731,714),(1050,714)],'발송 요청',(891,703))
-    d.arrow([(285,684),(270,684),(270,807),(1309,807),(1309,365),(1285,365)],dashed=True)
-    d.arrow([(1175,742),(1175,866),(10,866),(10,235),(24,235)],'사용자에게 알림 전달',(736,857))
-    d.text(660,906,'실선: 호출·데이터 전달  ·  점선: 초기 스키마 관리',20,True,fill='#475467')
+        '사용자 앱·Dashboard·내부 서버의 요청이 Spring Security 복호화·입력 검증과 Dispatcher를 거쳐 업무 Bean으로 연결되는 프로젝트 구조. 일반 데이터 접근은 MyBatis DAO·Mapper와 PostgreSQL, 알림은 외부 SMS·FCM 서비스를 사용한다.',960)
+    d.box(310,70,990,465,'Application Services · Wallet',width=2.8)
+    d.box(25,130,215,590,'Clients',width=2.8)
+    for y,icon,title in [(190,'smartphone','사용자 앱'),(365,'globe','Dashboard'),(540,'server','내부 서버')]:
+        d.node(icon,132,y,title,size=64,color=ARCH_BLUE)
+    web_service(d,350,145,330,340,'Java · Spring Boot',
+        ['Security · 복호화·입력 검증','Dispatcher · 업무 Bean 선택'])
+    d.node('wallet',850,215,'업무 Bean',['회원 · 지갑 · 인증','MyBatis DAO · Mapper'],size=76,color=ARCH_BLUE)
+    d.node('bell-ring',1150,215,'알림 모듈',['SMS · FCM 발송 요청'],size=76,color=ARCH_BLUE)
+    external_service(d,670,650,320,'Database','postgresql','PostgreSQL',['서비스 데이터'])
+    external_service(d,1040,650,260,'Messaging Service','firebase','SMS · FCM',['외부 알림 발송'])
+    d.arrow([(240,232),(285,232),(285,275),(350,275)])
+    d.arrow([(240,407),(285,407),(285,275)])
+    d.arrow([(240,582),(285,582),(285,407)])
+    d.text(296,215,'HTTP',18,fill=ARCH_BLUE)
+    d.arrow([(680,253),(800,253)])
+    d.arrow([(900,253),(1100,253)])
+    d.arrow([(850,407),(850,650)],'MyBatis / SQL',(850,592),both=True)
+    d.arrow([(1150,381),(1150,650)],'발송 요청',(1150,592))
+    d.arrow([(1170,870),(1170,930),(10,930),(10,232),(25,232)],'사용자에게 알림 전달',(610,918))
     return d.save('wallet-application.svg')
+
 
 
 def integration():
     d=Diagram('CMP v2.0 · 애플리케이션 아키텍처',
-        'React 관리 화면에서 CMP의 API·조회 서비스·WebClient를 거쳐 NSS와 NBU를 각각 조회하고, 인증 모듈이 NSS 연동을 사용하는 구조.')
-    d.text(660,48,'CMP v2.0 · 애플리케이션 아키텍처',30,True,fill=ARCH_BLUE)
-    d.box(260,110,750,580,fill='#fff',stroke=ARCH_BLUE,width=2.5)
-    d.text(290,154,'CMP · Spring WebFlux',28,True,anchor='start',fill=ARCH_BLUE)
-    d.icon('java',857,129,43); d.icon('spring',924,129,43)
-    component(d,20,270,195,'React UI','react',['조회 · 인증 화면'])
-    component(d,290,270,200,'Controller','network',['HTTP API'])
-    component(d,535,270,205,'조회 서비스','list-filter',['테넌트 매핑','후속 페이지 수집'])
-    component(d,780,220,200,'NSS 연동','network',['WebClient'])
-    component(d,780,455,200,'NBU 연동','network',['정책 조회'])
-    component(d,290,495,200,'인증 모듈','shield-check',['로그인 · 토큰 관리'])
-    component(d,1070,220,230,'NSS API','server',['인증 · Tenant','기존 백업 정보'])
-    component(d,1070,455,230,'NBU API','server',['cluster · namespace','Job · retention'])
-    d.arrow([(215,326),(290,326)],'HTTP/JSON',(249,253),both=True)
-    d.arrow([(490,326),(535,326)],both=True)
-    d.arrow([(740,308),(760,308),(760,276),(780,276)],both=True)
-    d.arrow([(740,344),(760,344),(760,511),(780,511)],both=True)
-    d.arrow([(980,276),(1070,276)],'API',(1025,250),both=True)
-    d.arrow([(980,511),(1070,511)],'API',(1025,487),both=True)
-    d.arrow([(390,382),(390,495)],'인증 처리',(390,440),both=True)
-    d.arrow([(490,551),(510,551),(510,415),(880,415),(880,332)],'NSS 인증',(690,406),both=True)
-    d.text(660,758,'클라이언트 ↔ 애플리케이션 내부 모듈 ↔ 외부 NSS·NBU API',22,True,fill='#475467')
+        'React 웹 클라이언트가 Spring WebFlux 서비스에 요청하고, 인증·테넌트 매핑·페이지 처리를 수행하는 서비스가 WebClient로 외부 NSS·NBU API를 연동하는 구조.',900)
+    d.box(330,75,970,440,'Application Services · CMP v2.0',width=2.8)
+    d.box(20,180,230,300,'Clients',width=2.8)
+    d.node('react',135,255,'React', 'Web Browser',size=80,color=ARCH_BLUE)
+    web_service(d,380,155,390,320,'Java · Spring WebFlux',
+        ['HTTP API · 인증·토큰 관리','테넌트 매핑 · 후속 페이지 처리'])
+    d.node('network',1070,215,'WebClient',['외부 API 연동','NSS · NBU'],size=80,color=ARCH_BLUE)
+    external_service(d,640,650,300,'External API','server','NSS API',['인증 · Tenant · 백업 정보'])
+    external_service(d,990,650,300,'External API','server','NBU API',['cluster · namespace','Job · retention'])
+    d.arrow([(250,295),(380,295)],'HTTP / JSON',(315,273),both=True)
+    d.arrow([(770,255),(1020,255)],'API 연동',(895,232),both=True)
+    d.arrow([(1070,408),(1070,570),(790,570),(790,650)],'NSS API',(875,560),both=True)
+    d.arrow([(1100,408),(1100,570),(1140,570),(1140,650)],'NBU API',(1190,600),both=True)
     return d.save('integration-application.svg')
+
 
 
 def backup_restore_verification():
