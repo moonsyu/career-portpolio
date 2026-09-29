@@ -198,10 +198,29 @@ def backup_async_flow():
 
 
 def wallet_xss_flow():
-    return submission_flow('wallet-xss-flow.svg','입력값 필터 적용 오류 수정',[
-        ('file-code','문제',['XSS 필터 미적용','입력값 처리 오류']),
-        ('shield-check','조치',['XSS 필터 오류 수정']),
-        ('workflow','후속',['XSS 필터 최적화'])])
+    d=Diagram('복호화된 요청의 XSS 필터 적용과 결과 전달',
+        '복호화 후 JSON 객체·배열의 문자열을 순회하고 AntiSamy 정제 결과를 요청 본문에 반영. 정책 파일을 한 번 로드해 재사용. 보안 명세서 테스트 로그에서 script 태그가 정제된 문자열로 전달됨을 확인.',760)
+    for i,(icon,title,lines) in enumerate([
+        ('file-code','복호화 · 값 탐색',['중첩 JSON 객체·배열 순회','문자열 값만 검사']),
+        ('shield-check','문자열 정제',['HTML 이스케이프 해제','AntiSamy 정책 적용']),
+        ('workflow','요청 본문 반영',['정제 결과로 본문 구성','업무 처리 단계에 전달'])]):
+        x=40+i*440
+        d.box(x,45,360,330,fill='#f7f9fc',stroke='#c9d6e8',width=1.6)
+        d.icon(icon,x+145,78,70,color=ARCH_BLUE)
+        d.text(x+180,207,title,28,True)
+        for j,line in enumerate(lines):d.text(x+180,263+j*39,line,23,True,fill=ARCH_BLUE)
+        if i<2:d.arrow([(x+370,207),(x+428,207)])
+    d.box(40,410,1240,105,fill='#eef4ff',stroke='#c9d6e8',width=1.6)
+    d.icon('book-open',69,438,46,color=ARCH_BLUE)
+    d.text(145,453,'정책 파일 1회 로드 · 재사용',28,True,anchor='start',fill=ARCH_BLUE)
+    d.text(145,491,'요청마다 정책 파일을 다시 읽는 처리 방지',22,anchor='start')
+    d.text(45,565,'테스트에서 확인한 입력 → 전달 결과',27,True,anchor='start',fill=ARCH_BLUE)
+    for x,title,detail in [(40,'script 태그가 포함된 입력','요청 파라미터에 공격 구문 입력'),(735,'script 태그가 제거된 값','업무 처리 로그의 정제 문자열 확인')]:
+        d.box(x,596,545,128,fill='#fff',stroke='#c9d6e8',width=1.6)
+        d.text(x+272,646,title,27,True)
+        d.text(x+272,689,detail,23,fill=ARCH_BLUE)
+    d.arrow([(595,660),(725,660)])
+    return d.save('wallet-xss-flow.svg')
 
 
 def wallet():
@@ -378,6 +397,28 @@ def integration_benchmark():
     return d.save('integration-benchmark.svg')
 
 
+def integration_benchmark_stability():
+    d=Diagram('20만 건 조회의 응답 지연과 오류율 비교',
+        '동일 호스트 사양, JVM 24GB, 조건별 1분. VU 5와 10 조건의 평균·P95·오류율을 함께 비교. VU 10에서 Ubuntu와 RHEL 모두 오류가 발생해 고부하 안정성 한계를 확인.',760)
+    for x,color,label in [(45,'#2855bf','Ubuntu 22.04.5'),(375,'#64748b','RHEL 9.4')]:
+        d.parts.append(f'<rect x="{x}" y="27" width="25" height="23" rx="4" fill="{color}"/>')
+        d.text(x+40,50,label,24,True,anchor='start')
+    for x,vu,rows in [(40,5,[(20036,24914),(38993,42904),('10.00%','0.00%')]),(680,10,[(47133,43814),(62758,58912),('10.00%','9.09%')])]:
+        d.box(x,82,600,502,fill='#f7f9fc',stroke='#c9d6e8',width=1.6)
+        d.text(x+300,134,f'20만 건 · VU {vu}',32,True)
+        for j,(label,values) in enumerate(zip(['평균 응답시간','P95 응답시간','오류율'],rows)):
+            y=205+j*133
+            d.text(x+28,y,label,24,True,anchor='start')
+            for k,v in enumerate(values):
+                text=f'{v:,} ms' if isinstance(v,int) else v
+                d.text(x+158+k*280,y+52,text,34,True,fill=['#2855bf','#64748b'][k])
+            if j<2:d.parts.append(f'<path d="M {x+28} {y+78} H {x+572}" stroke="#d4dfef"/>')
+    d.box(40,620,1240,104,fill='#eef4ff',stroke='#c9d6e8',width=1.6)
+    d.text(660,661,'평균 · P95 · 오류율을 함께 비교',30,True,fill=ARCH_BLUE)
+    d.text(660,701,'VU 10에서 두 환경 모두 오류 발생 → 고부하 조회 안정성 한계 확인',25,True)
+    return d.save('integration-benchmark-stability.svg')
+
+
 
 def backup_ai_development():
     d=Diagram('AI를 활용한 기술 검증과 개발 오류 해결',
@@ -408,5 +449,5 @@ if __name__ == '__main__':
     used |= overview('backup-overview.svg','Arabica · 원격 백업 관리','정책 · 실행 · 결과를 연결하는 백엔드',[('file-code','백업 정책','전체 · 증분 · 차등'),('linux','원격 실행','SSH · Bash'),('database','이력 · 복원','검증 · 검색 · 보관')])
     used |= overview('wallet-overview.svg','모바일 디지털 지갑','인증 · 데이터 보호 · 알림 기능 개발',[('user-round','회원 · 지갑','서비스 API'),('network','인증 · 보안','SSE · QR · RSA'),('cloud','알림','SMS · FCM')])
     used |= overview('integration-overview.svg','CMP · 외부 서비스 연동','',[('spring','WebFlux','구조 전환'),('network','인증 연동','WebClient 공통화'),('server','성능 시험','응답 · 메모리 · 오류')],footer=False)
-    for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy,backup_async_flow,wallet_xss_flow,implementation_diagrams,integration_benchmark,backup_ai_development]:used |= build()
-    print('Built 16 diagrams; icons:', ', '.join(sorted(used)))
+    for build in [backup,wallet,integration,backup_restore_verification,integration_response_comparison,integration_tenant_policy,backup_async_flow,wallet_xss_flow,implementation_diagrams,integration_benchmark,integration_benchmark_stability,backup_ai_development]:used |= build()
+    print('Built 17 diagrams; icons:', ', '.join(sorted(used)))

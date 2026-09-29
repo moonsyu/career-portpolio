@@ -1,0 +1,26 @@
+{
+  "sourceCommit": "6dabfe98b56841524ba5fd47ae095fe465d47e06",
+  "workingTreeDirty": true,
+  "htmlSha256": "57f92db81366ec5ed6fbd1aa1e9d0f76f82284ed514c5cdc4f71d5737d421c62",
+  "pdfSha256": "b471a98dda0f81ea3a378e98b04431ab80beb8d6417976954a3edf687c97e2b6",
+  "pageCount": 17,
+  "titles": [
+    "경력기술서",
+    "소개 · 연락처",
+    "Arabica",
+    "Arabica / API·비동기 실행·저장소로 구성한 백업 애플리케이션",
+    "Arabica / 정책·스케줄과 이력 조회를 위한 백엔드 구현",
+    "Arabica / AI를 활용한 기술 검증과 개발 오류 해결",
+    "Arabica / 장시간 백업 작업과 요청 처리 분리",
+    "CMP",
+    "CMP / NSS·NBU 연동을 분리한 조회 애플리케이션",
+    "CMP / 외부 API 응답 지연과 요청 처리 구조 개선",
+    "CMP / 테넌트별 백업 정책 조회 범위 수정",
+    "CMP / Ubuntu 22.04.5와 RHEL 9.4 조건별 응답시간 비교",
+    "CMP / 평균·P95·오류율로 고부하 조회 안정성 판단",
+    "Wallet",
+    "Wallet / 보안 필터와 Dispatcher 기반 요청 처리 구조",
+    "Wallet / 회원·지갑 API와 DB·API 문서화",
+    "Wallet / 복호화된 요청의 XSS 필터 적용과 결과 전달"
+  ]
+}

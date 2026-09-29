@@ -103,3 +103,40 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { rootMargin: '-10% 0px -65% 0px', threshold: 0 });
 sections.forEach(section => observer.observe(section));
+
+const pdfButton = document.querySelector('.button-pdf');
+if (pdfButton) {
+  let downloading = false;
+  const downloadStatus = document.createElement('span');
+  downloadStatus.className = 'visually-hidden';
+  downloadStatus.setAttribute('role', 'status');
+  pdfButton.after(downloadStatus);
+  pdfButton.addEventListener('click', async event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    if (downloading) return;
+    downloading = true;
+    pdfButton.setAttribute('aria-busy', 'true');
+    downloadStatus.textContent = '최신 PDF를 다운로드하고 있습니다.';
+    try {
+      // Revalidate even when this tab has stayed open across deployments.
+      const response = await fetch(pdfButton.href, {cache: 'no-store'});
+      if (!response.ok) throw new Error('PDF download failed');
+      const blob = await response.blob();
+      if (blob.type && !blob.type.includes('pdf')) throw new Error('Unexpected download format');
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = pdfButton.download || 'Jang-MoonSu-Career.pdf';
+      document.body.append(link);link.click();link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      downloadStatus.textContent = 'PDF 다운로드를 시작했습니다.';
+    } catch {
+      downloadStatus.className = '';
+      downloadStatus.textContent = 'PDF 다운로드에 실패했습니다. 잠시 후 다시 눌러 주세요.';
+    } finally {
+      downloading = false;
+      pdfButton.removeAttribute('aria-busy');
+    }
+  });
+}

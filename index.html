@@ -39,7 +39,7 @@
         <p class="hero-description">원격 백업 관리 · AI 활용 개발<br>외부 서비스 연동 · 모바일 디지털 지갑</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#projects">업무 보기 <span aria-hidden="true">↓</span></a>
-          <a class="button button-pdf" href="./output/pdf/Jang-MoonSu-Career.pdf?v=application-1" download="Jang-MoonSu-Career.pdf" aria-label="경력기술서 PDF 다운로드">PDF 다운로드 <span aria-hidden="true">↓</span></a>
+          <a class="button button-pdf" href="./output/pdf/Jang-MoonSu-Career.pdf?v=latest" download="Jang-MoonSu-Career.pdf" aria-label="경력기술서 PDF 다운로드">PDF 다운로드 <span aria-hidden="true">↓</span></a>
           <a class="button button-secondary" href="https://moonsyu.github.io/portpolio/" target="_blank" rel="noreferrer">프로젝트 포트폴리오 ↗</a>
         </div>
         <div class="hero-bottom" aria-label="경력 분야와 기간">
@@ -217,6 +217,12 @@
                 <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="NSS·NBU 조회 분리와 테넌트 매핑을 통한 정책 조회 확대"><img src="./assets/architecture/integration-tenant-policy.svg?v=submission-1" width="1320" height="600" alt="NSS·NBU 조회 분리와 테넌트 매핑을 통한 정책 조회" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>Kubernetes 백업 정책이 모든 테넌트에 표시</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>NSS·NBU 조회 경로 분리 및 페이지·API 로그 점검</li><li>테넌트·클러스터·namespace 매핑 필터 적용</li></ul></dd></div></dl></div>
               </section>
               <section class="detail-page" data-page-kind="benchmark" aria-labelledby="integration-benchmark-title"><p class="label">BENCHMARK</p><h4 class="detail-title" id="integration-benchmark-title">Ubuntu 22.04.5와 RHEL 9.4 조건별 응답시간 비교</h4><div class="benchmark-context"><ul><li>동일 호스트 사양 · JVM 24GB · Postman 조건별 각 1분</li><li>3만·20만 건 · 동시 가상 사용자(VU) 1·5·10명</li></ul></div><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="동일 호스트 사양의 Ubuntu와 RHEL 평균 응답시간 비교 확대"><img src="./assets/architecture/integration-benchmark.svg?v=submission-1" width="1320" height="760" alt="동일 호스트 사양의 Ubuntu와 RHEL 평균 응답시간 비교" loading="lazy"></button></figure><div class="visually-hidden"><table class="benchmark-table"><caption>평균 응답시간 비교 (ms)</caption><thead><tr><th scope="col">건수</th><th scope="col">VU</th><th scope="col">Ubuntu 22.04.5</th><th scope="col">RHEL 9.4</th></tr></thead><tbody><tr><td>30,000</td><td>1</td><td>1,474</td><td>1,179</td></tr><tr><td>30,000</td><td>5</td><td>2,678</td><td>2,469</td></tr><tr><td>30,000</td><td>10</td><td>5,421</td><td>5,247</td></tr><tr><td>200,000</td><td>1</td><td>7,174</td><td>6,617</td></tr><tr><td>200,000</td><td>5</td><td>20,036</td><td>24,914</td></tr><tr><td>200,000</td><td>10</td><td>47,133</td><td>43,814</td></tr></tbody></table></div></section>
+              <section class="detail-page" data-page-kind="benchmark" aria-labelledby="integration-stability-title">
+                <p class="label">BENCHMARK</p>
+                <h4 class="detail-title" id="integration-stability-title">평균·P95·오류율로 고부하 조회 안정성 판단</h4>
+                <div class="benchmark-context"><ul><li>동일 호스트 사양 · JVM 24GB · Postman 조건별 각 1분</li><li>20만 건 · VU 5·10명 · P95: 요청의 95%가 완료되는 응답시간</li></ul></div>
+                <figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="20만 건 조회의 평균·P95·오류율 비교 확대"><img src="./assets/architecture/integration-benchmark-stability.svg" width="1320" height="760" alt="20만 건 VU 5: Ubuntu 평균 20,036ms, P95 38,993ms, 오류율 10%; RHEL 평균 24,914ms, P95 42,904ms, 오류율 0%. VU 10: Ubuntu 평균 47,133ms, P95 62,758ms, 오류율 10%; RHEL 평균 43,814ms, P95 58,912ms, 오류율 9.09%. VU 10에서 두 환경 모두 오류 발생" loading="lazy"></button></figure>
+              </section>
             </div>
           </details>
         </article>
@@ -262,8 +268,8 @@
                 <h4 class="detail-title" id="wallet-implementation-title">회원·지갑 API와 DB·API 문서화</h4><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="회원·지갑 API, 인증·알림, DB·API 문서화 구현 확대"><img src="./assets/architecture/wallet-implementation.svg?v=submission-1" width="1320" height="440" alt="회원·지갑 API, 인증·알림, DB·API 문서화 구현" loading="lazy"></button></figure></section>
               <section class="detail-page" data-page-kind="troubleshooting" aria-labelledby="wallet-xss-title">
                 <p class="label">TROUBLESHOOTING</p>
-                <h4 class="detail-title" id="wallet-xss-title">입력값 필터 적용 오류 수정</h4>
-                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="XSS 필터 적용 오류 수정과 최적화 확대"><img src="./assets/architecture/wallet-xss-flow.svg?v=submission-1" width="1320" height="440" alt="XSS 필터 적용 오류 수정과 최적화" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>XSS 필터 미적용·처리 오류</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>XSS 필터 오류 수정</li><li>후속 필터 최적화</li></ul></dd></div></dl></div>
+                <h4 class="detail-title" id="wallet-xss-title">복호화된 요청의 XSS 필터 적용과 결과 전달</h4>
+                <div class="troubleshooting-grid"><figure class="evidence-figure"><button class="image-button" type="button" data-enlarge data-diagram aria-label="복호화 후 JSON 문자열 검사와 정제 결과 전달, 정책 파일 재사용 확대"><img src="./assets/architecture/wallet-xss-flow.svg?v=evidence-2" width="1320" height="760" alt="복호화 후 JSON 문자열 검사와 정제 결과 전달, 정책 파일 재사용" loading="lazy"></button></figure><dl class="case-facts troubleshooting-facts"><div><dt>문제</dt><dd><ul><li>입력값의 XSS 필터 미적용 및 처리 오류 발생</li></ul></dd></div><div><dt>조치</dt><dd><ul><li>복호화 후 중첩 JSON의 문자열 값을 검사하고 AntiSamy로 정제</li><li>정제 결과를 요청 본문에 반영해 업무 처리로 전달</li><li>정책 파일 1회 로드·재사용으로 반복 로딩 방지</li></ul></dd></div></dl></div>
               </section>
             </div>
           </details>

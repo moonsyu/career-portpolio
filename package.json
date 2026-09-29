@@ -3,9 +3,12 @@
   "private": true,
   "description": "Build tools for the downloadable career PDF",
   "scripts": {
-    "build:pdf": "python scripts/build_pdf.py"
+    "build:pdf": "node scripts/build_pdf.cjs",
+    "build:site": "node scripts/prepare_site.cjs",
+    "test": "node --test scripts/test_pdf.cjs"
   },
   "devDependencies": {
-    "sharp": "0.35.4"
+    "sharp": "0.35.4",
+    "playwright": "1.62.1"
   }
 }

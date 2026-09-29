@@ -60,22 +60,31 @@
 - 기존 애플리케이션 구성과 프로젝트 순서 유지; PDF 미갱신
 - 자체 검수: PC·모바일 렌더, SVG 텍스트·아이콘 겹침, 11개 화면 폭, 이미지 확대·이동·닫기 확인
 
-## PDF 갱신
+## PDF 자동 갱신
 
-- 출력: `output/pdf/Jang-MoonSu-Career.pdf`
-- 소개·회사 정보·업무 설명·구현 내용·개선·트러블슈팅·부하 비교: `index.html`에서 추출
-- 도식: 기존 SVG 자산 사용
-- 각 프로젝트의 아키텍처는 독립된 A4 가로 페이지에 확대 배치; 나머지 설명 페이지는 A4 세로 유지
-- 현재 구성: 소개 1쪽, 프로젝트별 개요·구현 3쪽, 아키텍처 3쪽, 트러블슈팅·개선·성능 시험 6쪽
-- 프로젝트별 상세 항목은 `section.detail-page` 순서대로 별도 PDF 페이지 생성
-- 2026-09-29 최신 요청: GitHub Pages만 수정; 기존 PDF 파일과 다운로드 링크 유지
-- 기존 PDF는 직전 구성의 보관본이며 최신 웹 개요·아키텍처 변경은 미반영
-- 추후 PDF 갱신 요청 시 현재 개요 HTML 구조에 맞춰 생성 스크립트부터 조정
-- 준비: `python -m pip install -r scripts/requirements-pdf.txt`, `npm install`
-- 생성: `python scripts/build_pdf.py`
-- 기본 글꼴: Windows 맑은 고딕, PDF에 글꼴 포함
-- 다른 환경: `--font-dir`로 `malgun.ttf`와 `malgunbd.ttf`가 있는 폴더 지정
-- 공유 Node 패키지 환경: `--node-modules`로 패키지 폴더 지정
+- 단일 콘텐츠 원본: `index.html`과 현재 SVG·이미지 자산
+- 생성: `npm ci`, `npx playwright install chromium`, `npm run build:pdf`
+- 형식: 모든 페이지 16:9 가로 슬라이드, 검색·선택 가능한 글자와 벡터 도식
+- 출력: `output/pdf/Jang-MoonSu-Career.pdf`, 생성 정보 `Jang-MoonSu-Career.json`
+- 프로젝트 개요와 모든 상세 섹션을 HTML 순서대로 자동 추출; 설명을 PDF 스크립트에 중복 작성하지 않음
+- `main`에 변경을 푸시하면 GitHub Actions가 PDF를 생성하고 웹과 같은 배포에 포함
+- 배포 성공 후 다운로드에 최신 내용 반영; 수동 PDF 수정·커밋 불필요
+- 다운로드 버튼: 매번 캐시를 사용하지 않고 최신 파일 요청; JavaScript 미사용 환경에서는 일반 다운로드 링크 제공
+- 배포 자산: 파일 해시를 URL에 붙여 CSS·이미지·PDF의 과거 캐시 방지
+- 자동 검사: HTML 변경 반영, 누락 이미지 및 글자 넘침 차단; 실패 시 배포 중단
+- 검증: `npm test`; 생성 후 전체 페이지 렌더 검토
+- Windows 로컬 Chrome 사용: `PDF_CHROMIUM_PATH`에 Chrome 실행 파일 경로 지정
+- Linux 배포 글꼴: Noto CJK; Windows 로컬: 맑은 고딕
+- 이전 Python 진입점은 새 생성기를 호출하는 호환용으로 유지
+
+## XSS·성능 판단 보완 · 2026-09-29
+
+- 근거: Starry Archive의 Wallet 보안 기술명세서·개인 주간보고·원본 코드, CMP 성능 테스트 보고서
+- XSS: 복호화된 중첩 JSON 문자열 검사, AntiSamy 정제, 요청 본문 반영, 정책 파일 1회 로드·재사용
+- XSS 도식 하단: 원본 테스트 로그에서 확인한 script 태그 입력과 정제 후 전달 결과를 요약한 도식; 새 시험이나 보안 완전성 검증 주장 없음
+- CMP: 20만 건·VU 5/10의 평균·P95·오류율 비교 추가; 두 환경 모두 VU 10에서 오류 발생한 고부하 한계 표시
+- 다른 조건의 불일치 수치에서 임의의 정답·개선율을 만들지 않음
+- 과거 아래 검토 기록의 PDF 미갱신 안내는 당시 작업 범위 기록; 현재 PDF 자동 갱신 절차가 우선
 
 ## CJ 직무 기준 재배치 검토 · 2026-09-29
 
